@@ -2,6 +2,7 @@ use crate::actions::Actions;
 use crate::loading::TextureAssets;
 use crate::GameState;
 use bevy::prelude::*;
+use bevy_prototype_lyon::prelude::*;
 
 pub struct PlayerPlugin;
 
@@ -12,12 +13,15 @@ pub struct Player;
 /// Player logic is only active during the State `GameState::Playing`
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system_set(
-            SystemSet::on_enter(GameState::Playing)
-                .with_system(spawn_player.system())
-                .with_system(spawn_camera.system()),
-        )
-        .add_system_set(SystemSet::on_update(GameState::Playing).with_system(move_player.system()));
+        app.add_plugin(ShapePlugin)
+            .add_system_set(
+                SystemSet::on_enter(GameState::Playing)
+                    .with_system(spawn_player.system())
+                    .with_system(spawn_camera.system()),
+            )
+            .add_system_set(
+                SystemSet::on_update(GameState::Playing).with_system(move_player.system()),
+            );
     }
 }
 
@@ -25,13 +29,18 @@ fn spawn_camera(mut commands: Commands) {
     commands.spawn_bundle(OrthographicCameraBundle::new_2d());
 }
 
-fn spawn_player(mut commands: Commands, textures: Res<TextureAssets>) {
+fn spawn_player(mut commands: Commands) {
+    let shape = shapes::Polygon {
+        points: vec![Vec2::new(5., 0.), Vec2::new(-5., 0.), Vec2::new(0., 15.)],
+        closed: true,
+    };
+
     commands
-        .spawn_bundle(SpriteBundle {
-            texture: textures.texture_bevy.clone(),
-            transform: Transform::from_translation(Vec3::new(0., 0., 1.)),
-            ..Default::default()
-        })
+        .spawn_bundle(GeometryBuilder::build_as(
+            &shape,
+            DrawMode::Fill(FillMode::color(Color::rgb_u8(249, 212, 35))),
+            Transform::from_xyz(0.0, 0.0, 1.0),
+        ))
         .insert(Player);
 }
 
