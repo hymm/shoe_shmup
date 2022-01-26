@@ -3,6 +3,7 @@ use crate::loading::TextureAssets;
 use crate::GameState;
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
+use std::f32;
 
 pub struct PlayerPlugin;
 
@@ -16,11 +17,14 @@ impl Plugin for PlayerPlugin {
         app.add_plugin(ShapePlugin)
             .add_system_set(
                 SystemSet::on_enter(GameState::Playing)
-                    .with_system(spawn_player.system())
-                    .with_system(spawn_camera.system()),
+                    .with_system(spawn_player)
+                    .with_system(spawn_camera),
             )
             .add_system_set(
-                SystemSet::on_update(GameState::Playing).with_system(move_player.system()),
+                SystemSet::on_update(GameState::Playing)
+                    .after("actions")
+                    .with_system(move_player)
+                    .with_system(point_player),
             );
     }
 }
@@ -61,4 +65,18 @@ fn move_player(
     for mut player_transform in player_query.iter_mut() {
         player_transform.translation += movement;
     }
+}
+
+fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, With<Player>>) {
+    if actions.player_point.is_none() {
+        return;
+    }
+    let mut player_transform = player_query.single_mut();
+    let target = actions
+        .player_point
+        .unwrap();
+
+    let forward = Vec2::normalize( target - player_transform.translation.truncate());
+    let angle = Vec2::Y.angle_between(forward);
+    player_transform.rotation = Quat::from_rotation_z(angle);
 }

@@ -8,7 +8,10 @@ pub struct ActionsPlugin;
 impl Plugin for ActionsPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<Actions>().add_system_set(
-            SystemSet::on_update(GameState::Playing).with_system(set_movement_actions.system()),
+            SystemSet::on_update(GameState::Playing)
+                .label("actions")
+                .with_system(set_movement_actions)
+                .with_system(set_point_actions),
         );
     }
 }
@@ -16,6 +19,7 @@ impl Plugin for ActionsPlugin {
 #[derive(Default)]
 pub struct Actions {
     pub player_movement: Option<Vec2>,
+    pub player_point: Option<Vec2>,
 }
 
 fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<KeyCode>>) {
@@ -72,6 +76,14 @@ fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<
         }
     } else {
         actions.player_movement = None;
+    }
+}
+
+fn set_point_actions(mut actions: ResMut<Actions>, mut cursor_pos: EventReader<CursorMoved>, wnds: Res<Windows>) {
+    let wnd = wnds.get_primary().unwrap();
+    for position in cursor_pos.iter() {
+        let size = Vec2::new(wnd.width() as f32, wnd.height() as f32);
+        actions.player_point = Some(position.position - size / 2.0);
     }
 }
 
