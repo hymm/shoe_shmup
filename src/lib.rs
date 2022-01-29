@@ -1,13 +1,17 @@
 mod actions;
 mod audio;
+mod bullet;
 mod loading;
 mod menu;
+mod physics;
 mod player;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
+use crate::bullet::BulletPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
+use crate::physics::PhysicsPlugin;
 use crate::player::PlayerPlugin;
 
 use bevy::app::App;
@@ -37,7 +41,9 @@ impl Plugin for GamePlugin {
             .add_plugin(MenuPlugin)
             .add_plugin(ActionsPlugin)
             .add_plugin(InternalAudioPlugin)
-            .add_plugin(PlayerPlugin);
+            .add_plugin(PlayerPlugin)
+            .add_plugin(PhysicsPlugin)
+            .add_plugin(BulletPlugin);
 
         #[cfg(debug_assertions)]
         {

@@ -8,7 +8,7 @@ use shoe_shmup::GamePlugin;
 
 fn main() {
     App::new()
-        .insert_resource(Msaa { samples: 1 })
+        .insert_resource(Msaa { samples: 4 })
         .insert_resource(ClearColor(Color::rgb(0.4, 0.4, 0.4)))
         .insert_resource(WindowDescriptor {
             width: 800.,

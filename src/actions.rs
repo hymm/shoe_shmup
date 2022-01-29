@@ -11,7 +11,8 @@ impl Plugin for ActionsPlugin {
             SystemSet::on_update(GameState::Playing)
                 .label("actions")
                 .with_system(set_movement_actions)
-                .with_system(set_point_actions),
+                .with_system(set_point_actions)
+                .with_system(set_shoot_action),
         );
     }
 }
@@ -20,6 +21,7 @@ impl Plugin for ActionsPlugin {
 pub struct Actions {
     pub player_movement: Option<Vec2>,
     pub player_point: Option<Vec2>,
+    pub player_shoot: bool,
 }
 
 fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<KeyCode>>) {
@@ -79,12 +81,25 @@ fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<
     }
 }
 
-fn set_point_actions(mut actions: ResMut<Actions>, mut cursor_pos: EventReader<CursorMoved>, wnds: Res<Windows>) {
+fn set_point_actions(
+    mut actions: ResMut<Actions>,
+    mut cursor_pos: EventReader<CursorMoved>,
+    wnds: Res<Windows>,
+) {
     let wnd = wnds.get_primary().unwrap();
     for position in cursor_pos.iter() {
         let size = Vec2::new(wnd.width() as f32, wnd.height() as f32);
         actions.player_point = Some(position.position - size / 2.0);
     }
+}
+
+fn set_shoot_action(
+    mut actions: ResMut<Actions>,
+    keyboard_input: Res<Input<KeyCode>>,
+    mouse_button: Res<Input<MouseButton>>,
+) {
+    actions.player_shoot =
+        keyboard_input.just_pressed(KeyCode::Space) || mouse_button.just_pressed(MouseButton::Left);
 }
 
 enum GameControl {

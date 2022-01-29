@@ -1,9 +1,8 @@
 use crate::actions::Actions;
-use crate::loading::TextureAssets;
+use crate::bullet::SpawnBullet;
 use crate::GameState;
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
-use std::f32;
 
 pub struct PlayerPlugin;
 
@@ -24,7 +23,8 @@ impl Plugin for PlayerPlugin {
                 SystemSet::on_update(GameState::Playing)
                     .after("actions")
                     .with_system(move_player)
-                    .with_system(point_player),
+                    .with_system(point_player)
+                    .with_system(player_shoot),
             );
     }
 }
@@ -72,11 +72,22 @@ fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, W
         return;
     }
     let mut player_transform = player_query.single_mut();
-    let target = actions
-        .player_point
-        .unwrap();
+    let target = actions.player_point.unwrap();
 
-    let forward = Vec2::normalize( target - player_transform.translation.truncate());
+    let forward = Vec2::normalize(target - player_transform.translation.truncate());
     let angle = Vec2::Y.angle_between(forward);
     player_transform.rotation = Quat::from_rotation_z(angle);
+}
+
+fn player_shoot(
+    actions: Res<Actions>,
+    player_query: Query<&Transform, With<Player>>,
+    mut spawn_bullet: EventWriter<SpawnBullet>,
+) {
+    if actions.player_shoot {
+        let t = player_query.single();
+        spawn_bullet.send(SpawnBullet {
+            initial_transform: t.clone(),
+        })
+    }
 }
