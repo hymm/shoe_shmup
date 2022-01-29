@@ -1,6 +1,7 @@
 mod actions;
 mod audio;
 mod bullet;
+mod enemy;
 mod loading;
 mod menu;
 mod physics;
@@ -9,6 +10,7 @@ mod player;
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
 use crate::bullet::BulletPlugin;
+use crate::enemy::EnemyPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
 use crate::physics::PhysicsPlugin;
@@ -43,7 +45,8 @@ impl Plugin for GamePlugin {
             .add_plugin(InternalAudioPlugin)
             .add_plugin(PlayerPlugin)
             .add_plugin(PhysicsPlugin)
-            .add_plugin(BulletPlugin);
+            .add_plugin(BulletPlugin)
+            .add_plugin(EnemyPlugin);
 
         #[cfg(debug_assertions)]
         {
