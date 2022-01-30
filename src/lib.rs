@@ -1,6 +1,7 @@
 mod actions;
 mod audio;
 mod bullet;
+mod constants;
 mod enemy;
 mod loading;
 mod menu;
@@ -10,16 +11,17 @@ mod player;
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
 use crate::bullet::BulletPlugin;
+pub use crate::constants::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use crate::enemy::EnemyPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
 use crate::physics::PhysicsPlugin;
 use crate::player::PlayerPlugin;
 
-use bevy::app::App;
 #[cfg(debug_assertions)]
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
+use bevy::{app::App, diagnostic::EntityCountDiagnosticsPlugin};
 
 // This example game uses States to separate logic
 // See https://bevy-cheatbook.github.io/programming/states.html
@@ -51,6 +53,7 @@ impl Plugin for GamePlugin {
         #[cfg(debug_assertions)]
         {
             app.add_plugin(FrameTimeDiagnosticsPlugin::default())
+                .add_plugin(EntityCountDiagnosticsPlugin::default())
                 .add_plugin(LogDiagnosticsPlugin::default());
         }
     }

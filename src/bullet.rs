@@ -1,4 +1,7 @@
-use crate::physics::Velocity;
+use crate::{
+    constants::{SCREEN_HEIGHT, SCREEN_WIDTH},
+    physics::Velocity,
+};
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
@@ -35,9 +38,23 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
     }
 }
 
+fn despawn_bullet(mut commands: Commands, bullets: Query<(Entity, &Transform), With<Bullet>>) {
+    for (e, t) in bullets.iter() {
+        if t.translation.x > SCREEN_WIDTH / 2.0
+            || t.translation.x < -SCREEN_WIDTH / 2.0
+            || t.translation.y > SCREEN_HEIGHT / 2.0
+            || t.translation.y < -SCREEN_HEIGHT / 2.0
+        {
+            commands.entity(e).despawn();
+        }
+    }
+}
+
 pub struct BulletPlugin;
 impl Plugin for BulletPlugin {
     fn build(&self, app: &mut App) {
-        app.add_event::<SpawnBullet>().add_system(spawn_bullet);
+        app.add_event::<SpawnBullet>()
+            .add_system(spawn_bullet)
+            .add_system(despawn_bullet);
     }
 }

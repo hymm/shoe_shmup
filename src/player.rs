@@ -44,7 +44,7 @@ fn spawn_camera(mut commands: Commands) {
 
 fn spawn_player(mut commands: Commands) {
     let shape = shapes::Polygon {
-        points: vec![Vec2::new(5., 0.), Vec2::new(-5., 0.), Vec2::new(0., 15.)],
+        points: vec![Vec2::new(5., 0.), Vec2::new(-8., 0.), Vec2::new(0., 20.)],
         closed: true,
     };
 
