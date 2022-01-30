@@ -6,7 +6,7 @@ use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
 #[derive(Component)]
-struct Enemy;
+pub(crate) struct Enemy;
 
 fn spawn_enemy(mut commands: Commands) {
     let length = 30.0;
