@@ -1,20 +1,22 @@
 use crate::physics::Velocity;
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
+use impacted::CollisionShape;
 
 const BULLET_SPEED: f32 = 500.0;
 
 #[derive(Component)]
-struct Bullet;
+pub(crate) struct Bullet;
 
 pub struct SpawnBullet {
     pub initial_transform: Transform,
 }
 
 fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet>) {
+    let bullet_radius = 4.0;
     for ev in spawn_event.iter() {
         let shape = shapes::Circle {
-            radius: 4.0,
+            radius: bullet_radius,
             ..Default::default()
         };
         // calculate velocity vector based on rotation of character
@@ -28,7 +30,8 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
                 ev.initial_transform,
             ))
             .insert(Bullet)
-            .insert(velocity);
+            .insert(velocity)
+            .insert(CollisionShape::new_circle(bullet_radius));
     }
 }
 
