@@ -7,6 +7,7 @@ mod loading;
 mod menu;
 mod physics;
 mod player;
+mod player_rail;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;

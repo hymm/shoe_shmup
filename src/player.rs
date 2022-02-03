@@ -3,6 +3,7 @@ use crate::bullet::SpawnBullet;
 use crate::enemy::Enemy;
 use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::GameState;
+use crate::player_rail::{PlayerRail, RailPosition, RailDirection};
 use bevy::prelude::*;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
@@ -17,6 +18,10 @@ pub struct Player;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugin(ShapePlugin)
+            .insert_resource(PlayerRail {
+                rail: vec![Vec2::new(-120.0, -220.0), Vec2::new(120.0, -220.0)],
+                closed: false,
+            })
             .add_system_set(
                 SystemSet::on_enter(GameState::Playing)
                     .with_system(spawn_player)
@@ -55,26 +60,23 @@ fn spawn_player(mut commands: Commands) {
             Transform::from_xyz(0.0, 0.0, 1.0),
         ))
         .insert(Player)
-        .insert(CollisionShape::new_rectangle(8.0, 12.0));
+        .insert(CollisionShape::new_rectangle(8.0, 12.0))
+        .insert(RailPosition { index: 0, position: 0.0, direction: RailDirection::Positive});
 }
 
 fn move_player(
     time: Res<Time>,
     actions: Res<Actions>,
-    mut player_query: Query<&mut Transform, With<Player>>,
+    mut player_query: Query<(&mut Transform, &mut RailPosition), With<Player>>,
+    rail: Res<PlayerRail>,
 ) {
-    if player_query.is_empty() || actions.player_movement.is_none() {
+    if player_query.is_empty() {
         return;
     }
-    let speed = 150.;
-    let movement = Vec3::new(
-        actions.player_movement.unwrap().x * speed * time.delta_seconds(),
-        actions.player_movement.unwrap().y * speed * time.delta_seconds(),
-        0.,
-    );
-    for mut player_transform in player_query.iter_mut() {
-        player_transform.translation += movement;
-    }
+    let speed = 100.;
+
+    let (mut player_transform, mut rail_position) = player_query.single_mut();
+    player_transform.translation = rail_position.next_position(&rail, time.delta_seconds(), speed).extend(0.0);
 }
 
 fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, With<Player>>) {
