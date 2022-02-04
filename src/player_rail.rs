@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+#[derive(Component)]
 pub struct PlayerRail {
     pub rail: Vec<Vec2>,
     // is the rail a closed path
