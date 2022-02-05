@@ -1,9 +1,10 @@
 use crate::{
     constants::{SCREEN_HEIGHT, SCREEN_WIDTH},
     physics::Velocity,
+    GameState,
 };
 use bevy::prelude::*;
-use bevy_prototype_lyon::prelude::*;
+use bevy_prototype_lyon::{entity::ShapeBundle, prelude::*};
 use impacted::CollisionShape;
 
 const BULLET_SPEED: f32 = 500.0;
@@ -71,11 +72,69 @@ fn despawn_bullet(mut commands: Commands, bullets: Query<(Entity, &Transform), W
     }
 }
 
+#[derive(Component)]
+struct BulletClipGraphic;
+
+#[derive(Bundle)]
+struct BulletClipGraphicBundle {
+    tag: BulletClipGraphic,
+    #[bundle]
+    shape_bundle: ShapeBundle,
+}
+
+fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
+    let start_point = Vec2::new(-100., -230.);
+    (0..num_bullets)
+        .map(|i| {
+            let point = Vec2::new(start_point.x, start_point.y) + i as f32 * Vec2::new(3., 0.);
+            return BulletClipGraphicBundle {
+                tag: BulletClipGraphic,
+                shape_bundle: GeometryBuilder::build_as(
+                    &shapes::Line(point, point + Vec2::new(0.0, -8.0)),
+                    DrawMode::Stroke(StrokeMode::new(Color::rgb_u8(0, 0, 0), 2.)),
+                    Transform::default(),
+                ),
+            };
+        })
+        .collect()
+}
+
+// show the number of bullets on screen
+fn spawn_bullet_clip(mut commands: Commands) {
+    const MAX_BULLETS: usize = 5;
+
+    commands.spawn().insert(BulletClip {
+        max_size: MAX_BULLETS,
+        bullets: MAX_BULLETS,
+    });
+
+    commands.spawn_batch(get_bullet_clip_bundles(MAX_BULLETS));
+}
+
+fn update_bullet_clip(
+    mut commands: Commands,
+    clip: Query<&BulletClip, Changed<BulletClip>>,
+    graphics: Query<Entity, With<BulletClipGraphic>>,
+) {
+    if clip.is_empty() {
+        return;
+    }
+    for entity in graphics.iter() {
+        commands.entity(entity).despawn();
+    }
+    commands.spawn_batch(get_bullet_clip_bundles(clip.single().bullets));
+}
+
 pub struct BulletPlugin;
 impl Plugin for BulletPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<SpawnBullet>()
-            .add_system(spawn_bullet)
-            .add_system(despawn_bullet);
+            .add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_bullet_clip))
+            .add_system_set(
+                SystemSet::on_update(GameState::Playing)
+                    .with_system(spawn_bullet)
+                    .with_system(despawn_bullet)
+                    .with_system(update_bullet_clip),
+            );
     }
 }

@@ -62,15 +62,11 @@ fn spawn_player(mut commands: Commands) {
             index: 0,
             position: 0.0,
             direction: RailDirection::Positive,
-        })
-        .insert(BulletClip {
-            max_size: 5,
-            bullets: 5,
         });
 }
 
 fn spawn_rail(mut commands: Commands) {
-    let rail_points = vec![Vec2::new(-120.0, -220.0), Vec2::new(120.0, -220.0)];
+    let rail_points = vec![Vec2::new(-110.0, -220.0), Vec2::new(110.0, -220.0)];
     let rail_color = Color::rgb_u8(135, 188, 108);
     let mut segments = vec![];
     let mut points = vec![];
@@ -115,7 +111,8 @@ fn spawn_rail(mut commands: Commands) {
 fn move_player(
     time: Res<Time>,
     actions: Res<Actions>,
-    mut player_query: Query<(&mut Transform, &mut RailPosition, &mut BulletClip), With<Player>>,
+    mut player_query: Query<(&mut Transform, &mut RailPosition), With<Player>>,
+    mut clip: Query<&mut BulletClip>,
     rail: Query<&PlayerRail>,
 ) {
     if player_query.is_empty() || actions.player_stop {
@@ -123,7 +120,8 @@ fn move_player(
     }
     let speed = 150.;
 
-    let (mut player_transform, mut rail_position, mut clip) = player_query.single_mut();
+    let mut clip = clip.single_mut();
+    let (mut player_transform, mut rail_position) = player_query.single_mut();
     let (t, at_node) = rail_position.next_position(&rail.single(), time.delta_seconds(), speed);
     if at_node {
         clip.reload();
@@ -145,11 +143,13 @@ fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, W
 
 fn player_shoot(
     actions: Res<Actions>,
-    mut player_query: Query<(&Transform, &mut BulletClip), With<Player>>,
+    mut player_query: Query<&Transform, With<Player>>,
+    mut clip: Query<&mut BulletClip>,
     mut spawn_bullet: EventWriter<SpawnBullet>,
 ) {
     if actions.player_shoot {
-        let (t, mut clip) = player_query.single_mut();
+        let t = player_query.single_mut();
+        let mut clip = clip.single_mut();
         if clip.try_shoot() {
             spawn_bullet.send(SpawnBullet {
                 initial_transform: t.clone(),
