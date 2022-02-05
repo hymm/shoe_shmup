@@ -21,64 +21,17 @@ impl Plugin for ActionsPlugin {
 pub struct Actions {
     pub player_movement: Option<Vec2>,
     pub player_point: Option<Vec2>,
+    pub player_stop: bool,
     pub player_shoot: bool,
 }
 
-fn set_movement_actions(mut actions: ResMut<Actions>, keyboard_input: Res<Input<KeyCode>>) {
-    if GameControl::Up.just_released(&keyboard_input)
-        || GameControl::Up.pressed(&keyboard_input)
-        || GameControl::Left.just_released(&keyboard_input)
-        || GameControl::Left.pressed(&keyboard_input)
-        || GameControl::Down.just_released(&keyboard_input)
-        || GameControl::Down.pressed(&keyboard_input)
-        || GameControl::Right.just_released(&keyboard_input)
-        || GameControl::Right.pressed(&keyboard_input)
-    {
-        let mut player_movement = Vec2::ZERO;
-
-        if GameControl::Up.just_released(&keyboard_input)
-            || GameControl::Down.just_released(&keyboard_input)
-        {
-            if GameControl::Up.pressed(&keyboard_input) {
-                player_movement.y = 1.;
-            } else if GameControl::Down.pressed(&keyboard_input) {
-                player_movement.y = -1.;
-            } else {
-                player_movement.y = 0.;
-            }
-        } else if GameControl::Up.just_pressed(&keyboard_input) {
-            player_movement.y = 1.;
-        } else if GameControl::Down.just_pressed(&keyboard_input) {
-            player_movement.y = -1.;
-        } else {
-            player_movement.y = actions.player_movement.unwrap_or(Vec2::ZERO).y;
-        }
-
-        if GameControl::Right.just_released(&keyboard_input)
-            || GameControl::Left.just_released(&keyboard_input)
-        {
-            if GameControl::Right.pressed(&keyboard_input) {
-                player_movement.x = 1.;
-            } else if GameControl::Left.pressed(&keyboard_input) {
-                player_movement.x = -1.;
-            } else {
-                player_movement.x = 0.;
-            }
-        } else if GameControl::Right.just_pressed(&keyboard_input) {
-            player_movement.x = 1.;
-        } else if GameControl::Left.just_pressed(&keyboard_input) {
-            player_movement.x = -1.;
-        } else {
-            player_movement.x = actions.player_movement.unwrap_or(Vec2::ZERO).x;
-        }
-
-        if player_movement != Vec2::ZERO {
-            player_movement = player_movement.normalize();
-            actions.player_movement = Some(player_movement);
-        }
-    } else {
-        actions.player_movement = None;
-    }
+fn set_movement_actions(
+    mut actions: ResMut<Actions>,
+    keyboard_input: Res<Input<KeyCode>>,
+    mouse_button: Res<Input<MouseButton>>,
+) {
+    actions.player_stop =
+        keyboard_input.pressed(KeyCode::F) || mouse_button.pressed(MouseButton::Right);
 }
 
 fn set_point_actions(
@@ -98,8 +51,11 @@ fn set_shoot_action(
     keyboard_input: Res<Input<KeyCode>>,
     mouse_button: Res<Input<MouseButton>>,
 ) {
-    actions.player_shoot =
-        keyboard_input.just_pressed(KeyCode::Space) || mouse_button.just_pressed(MouseButton::Left);
+    actions.player_shoot = if actions.player_stop {
+        keyboard_input.just_pressed(KeyCode::Space) || mouse_button.just_pressed(MouseButton::Left)
+    } else {
+        false
+    };
 }
 
 enum GameControl {

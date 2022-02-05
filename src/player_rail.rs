@@ -23,26 +23,34 @@ pub struct RailPosition {
 }
 
 impl RailPosition {
-    pub fn next_position(&mut self, rail: &PlayerRail, delta_time: f32, speed: f32) -> Vec2 {
+    pub fn next_position(
+        &mut self,
+        rail: &PlayerRail,
+        delta_time: f32,
+        speed: f32,
+    ) -> (Vec2, bool) {
         let index = self.index;
         let segment = rail.rail[index + 1] - rail.rail[index];
         let delta_position = speed * delta_time / segment.length();
+        let mut at_node = false;
         match self.direction {
             RailDirection::Negative => {
                 self.position -= delta_position;
                 if self.position < 0.0 {
                     self.position = 0.0;
                     self.direction = RailDirection::Positive;
+                    at_node = true;
                 }
-                rail.rail[index] + segment * self.position
+                (rail.rail[index] + segment * self.position, at_node)
             }
             RailDirection::Positive => {
                 self.position += delta_position;
                 if self.position > 1.0 {
                     self.position = 1.0;
                     self.direction = RailDirection::Negative;
+                    at_node = true;
                 }
-                rail.rail[index] + segment * self.position
+                (rail.rail[index] + segment * self.position, at_node)
             }
         }
     }

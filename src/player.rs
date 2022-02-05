@@ -1,5 +1,5 @@
 use crate::actions::Actions;
-use crate::bullet::SpawnBullet;
+use crate::bullet::{BulletClip, SpawnBullet};
 use crate::enemy::Enemy;
 use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
@@ -62,6 +62,10 @@ fn spawn_player(mut commands: Commands) {
             index: 0,
             position: 0.0,
             direction: RailDirection::Positive,
+        })
+        .insert(BulletClip {
+            max_size: 5,
+            bullets: 5,
         });
 }
 
@@ -70,14 +74,14 @@ fn spawn_rail(mut commands: Commands) {
     let rail_color = Color::rgb_u8(135, 188, 108);
     let mut segments = vec![];
     let mut points = vec![];
-    
+
     points.push(GeometryBuilder::build_as(
         &shapes::Circle {
             radius: 10.,
             center: rail_points[0],
         },
         DrawMode::Fill(FillMode::color(rail_color)),
-        Transform::from_xyz(0.0, 0.0, 0.0)
+        Transform::from_xyz(0.0, 0.0, 0.0),
     ));
 
     for (point1, point2) in rail_points[..rail_points.len() - 1]
@@ -96,7 +100,7 @@ fn spawn_rail(mut commands: Commands) {
                 center: *point2,
             },
             DrawMode::Fill(FillMode::color(rail_color)),
-            Transform::from_xyz(0.0, 0.0, 0.0)
+            Transform::from_xyz(0.0, 0.0, 0.0),
         ));
     }
 
@@ -111,18 +115,20 @@ fn spawn_rail(mut commands: Commands) {
 fn move_player(
     time: Res<Time>,
     actions: Res<Actions>,
-    mut player_query: Query<(&mut Transform, &mut RailPosition), With<Player>>,
+    mut player_query: Query<(&mut Transform, &mut RailPosition, &mut BulletClip), With<Player>>,
     rail: Query<&PlayerRail>,
 ) {
-    if player_query.is_empty() {
+    if player_query.is_empty() || actions.player_stop {
         return;
     }
-    let speed = 100.;
+    let speed = 150.;
 
-    let (mut player_transform, mut rail_position) = player_query.single_mut();
-    player_transform.translation = rail_position
-        .next_position(&rail.single(), time.delta_seconds(), speed)
-        .extend(0.0);
+    let (mut player_transform, mut rail_position, mut clip) = player_query.single_mut();
+    let (t, at_node) = rail_position.next_position(&rail.single(), time.delta_seconds(), speed);
+    if at_node {
+        clip.reload();
+    }
+    player_transform.translation = t.extend(0.0);
 }
 
 fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, With<Player>>) {
@@ -139,14 +145,16 @@ fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, W
 
 fn player_shoot(
     actions: Res<Actions>,
-    player_query: Query<&Transform, With<Player>>,
+    mut player_query: Query<(&Transform, &mut BulletClip), With<Player>>,
     mut spawn_bullet: EventWriter<SpawnBullet>,
 ) {
     if actions.player_shoot {
-        let t = player_query.single();
-        spawn_bullet.send(SpawnBullet {
-            initial_transform: t.clone(),
-        })
+        let (t, mut clip) = player_query.single_mut();
+        if clip.try_shoot() {
+            spawn_bullet.send(SpawnBullet {
+                initial_transform: t.clone(),
+            })
+        }
     }
 }
 

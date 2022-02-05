@@ -15,6 +15,27 @@ pub struct SpawnBullet {
     pub initial_transform: Transform,
 }
 
+#[derive(Component)]
+pub struct BulletClip {
+    pub max_size: usize,
+    pub bullets: usize,
+}
+
+impl BulletClip {
+    pub fn try_shoot(&mut self) -> bool {
+        if self.bullets > 0 {
+            self.bullets -= 1;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn reload(&mut self) {
+        self.bullets = self.max_size;
+    }
+}
+
 fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet>) {
     let bullet_radius = 4.0;
     for ev in spawn_event.iter() {
