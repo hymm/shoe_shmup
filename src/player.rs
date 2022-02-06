@@ -1,10 +1,12 @@
 use crate::actions::Actions;
 use crate::bullet::{BulletClip, SpawnBullet};
 use crate::enemy::Enemy;
+use crate::loading::AudioAssets;
 use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
 use crate::GameState;
 use bevy::prelude::*;
+use bevy_kira_audio::Audio;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
@@ -114,6 +116,8 @@ fn move_player(
     mut player_query: Query<(&mut Transform, &mut RailPosition), With<Player>>,
     mut clip: Query<&mut BulletClip>,
     rail: Query<&PlayerRail>,
+    audio_assets: Res<AudioAssets>,
+    audio: Res<Audio>,
 ) {
     if player_query.is_empty() || actions.player_stop {
         return;
@@ -123,8 +127,9 @@ fn move_player(
     let mut clip = clip.single_mut();
     let (mut player_transform, mut rail_position) = player_query.single_mut();
     let (t, at_node) = rail_position.next_position(&rail.single(), time.delta_seconds(), speed);
-    if at_node {
+    if at_node && !clip.is_full() {
         clip.reload();
+        audio.play(audio_assets.reload.clone());
     }
     player_transform.translation = t.extend(0.0);
 }
@@ -146,6 +151,8 @@ fn player_shoot(
     mut player_query: Query<&Transform, With<Player>>,
     mut clip: Query<&mut BulletClip>,
     mut spawn_bullet: EventWriter<SpawnBullet>,
+    asset_server: Res<AssetServer>,
+    audio: Res<Audio>,
 ) {
     if actions.player_shoot {
         let t = player_query.single_mut();
@@ -153,7 +160,10 @@ fn player_shoot(
         if clip.try_shoot() {
             spawn_bullet.send(SpawnBullet {
                 initial_transform: t.clone(),
-            })
+            });
+            audio.play(asset_server.load("audio/shoot.wav"));
+        } else {
+            audio.play(asset_server.load("audio/empty_clip.wav"));
         }
     }
 }

@@ -1,7 +1,9 @@
 use crate::bullet::Bullet;
+use crate::loading::AudioAssets;
 use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::GameState;
 use bevy::prelude::*;
+use bevy_kira_audio::Audio;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
@@ -28,12 +30,19 @@ fn check_collisions_with_bullets(
     mut commands: Commands,
     bullets: Query<(Entity, &CollisionShape), (With<Bullet>, Without<Enemy>)>,
     enemies: Query<(Entity, &CollisionShape), With<Enemy>>,
+    audio_assets: Option<Res<AudioAssets>>,
+    audio: Res<Audio>,
 ) {
+    if audio_assets.is_none() {
+        return;
+    }
+    let audio_assets = audio_assets.unwrap();
     for (bullet_entity, bullet_shape) in bullets.iter() {
         for (enemy_entity, enemy_shape) in enemies.iter() {
             if bullet_shape.is_collided_with(enemy_shape) {
                 commands.entity(bullet_entity).despawn();
                 commands.entity(enemy_entity).despawn();
+                audio.play(audio_assets.explode.clone());
             }
         }
     }

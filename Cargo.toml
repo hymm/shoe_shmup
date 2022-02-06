@@ -21,7 +21,8 @@ default = [
     "bevy/render",
     "bevy/png",
     "bevy/x11",
-    "bevy_kira_audio/ogg"
+    "bevy_kira_audio/ogg",
+    "bevy_kira_audio/wav"
 ]
 
 dev = [

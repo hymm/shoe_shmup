@@ -35,6 +35,10 @@ impl BulletClip {
     pub fn reload(&mut self) {
         self.bullets = self.max_size;
     }
+
+    pub fn is_full(&mut self) -> bool {
+        self.bullets >= self.max_size
+    }
 }
 
 fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet>) {
