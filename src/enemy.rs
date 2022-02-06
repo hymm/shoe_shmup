@@ -64,12 +64,16 @@ fn check_collisions_with_bullets(
     }
     let audio_assets = audio_assets.unwrap();
     for (bullet_entity, bullet_shape) in bullets.iter() {
+        let mut bullet_collided = false;
         for (enemy_entity, enemy_shape) in enemies.iter() {
             if bullet_shape.is_collided_with(enemy_shape) {
-                commands.entity(bullet_entity).despawn();
                 commands.entity(enemy_entity).despawn();
                 audio.play(audio_assets.explode.clone());
+                bullet_collided = true;
             }
+        }
+        if bullet_collided {
+            commands.entity(bullet_entity).despawn();
         }
     }
 }
