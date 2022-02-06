@@ -4,26 +4,52 @@ use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::GameState;
 use bevy::prelude::*;
 use bevy_kira_audio::Audio;
+use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
+
+const ENEMY_LENGTH: f32 = 30.;
 
 #[derive(Component)]
 pub(crate) struct Enemy;
 
+#[derive(Bundle)]
+struct EnemyBundle {
+    enemy_tag: Enemy,
+    #[bundle]
+    shape_bundle: ShapeBundle,
+    collision_shape: CollisionShape,
+}
+
+impl EnemyBundle {
+    fn new(transform: Transform) -> Self {
+        Self {
+            enemy_tag: Enemy,
+            shape_bundle: GeometryBuilder::build_as(
+                &shapes::Rectangle {
+                    extents: Vec2::new(ENEMY_LENGTH, ENEMY_LENGTH),
+                    origin: shapes::RectangleOrigin::Center,
+                },
+                DrawMode::Fill(FillMode::color(Color::rgb_u8(164, 69, 55))),
+                transform,
+            ),
+            collision_shape: CollisionShape::new_rectangle(ENEMY_LENGTH, ENEMY_LENGTH),
+        }
+    }
+}
+
 fn spawn_enemy(mut commands: Commands) {
-    let length = 30.0;
-    let shape = shapes::Rectangle {
-        extents: Vec2::new(length, length),
-        origin: shapes::RectangleOrigin::Center,
-    };
-    commands
-        .spawn_bundle(GeometryBuilder::build_as(
-            &shape,
-            DrawMode::Fill(FillMode::color(Color::rgb_u8(164, 69, 55))),
-            Transform::from_xyz(-20.0, 200.0, 1.0),
-        ))
-        .insert(Enemy)
-        .insert(CollisionShape::new_rectangle(length, length));
+    let mut bundles = vec![];
+    for x in 0..7 {
+        for y in 0..5 {
+            bundles.push(EnemyBundle::new(Transform::from_xyz(
+                -105.0 + x as f32 * (ENEMY_LENGTH + 5.0),
+                220.0 - y as f32 * (ENEMY_LENGTH + 5.0),
+                1.0,
+            )))
+        }
+    }
+    commands.spawn_batch(bundles);
 }
 
 fn check_collisions_with_bullets(
