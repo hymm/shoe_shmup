@@ -218,15 +218,18 @@ fn check_player_collisions_with_enemies(
     mut commands: Commands,
     player: Query<(Entity, &CollisionShape), (With<Player>, Without<Enemy>)>,
     enemies: Query<(Entity, &CollisionShape), With<Enemy>>,
+    audio_assets: Option<Res<AudioAssets>>,
+    audio: Res<Audio>,
 ) {
-    if player.iter().next().is_none() {
+    if player.iter().next().is_none() || audio_assets.is_none() {
         return;
     }
     let (player_entity, player_shape) = player.single();
-
+    let player_death_sfx = audio_assets.unwrap().player_death.clone();
     for (_enemy_entity, enemy_shape) in enemies.iter() {
         if player_shape.is_collided_with(enemy_shape) {
             commands.entity(player_entity).despawn();
+            audio.play(player_death_sfx.clone());
         }
     }
 }

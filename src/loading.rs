@@ -38,6 +38,8 @@ pub struct AudioAssets {
     pub reload: Handle<AudioSource>,
     #[asset(path = "audio/explode.wav")]
     pub explode: Handle<AudioSource>,
+    #[asset(path = "audio/player_death.wav")]
+    pub player_death: Handle<AudioSource>,
 }
 
 #[derive(AssetCollection)]
