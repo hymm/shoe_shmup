@@ -2,11 +2,12 @@ use crate::actions::Actions;
 use crate::bullet::{BulletClip, SpawnBullet};
 use crate::enemy::Enemy;
 use crate::loading::AudioAssets;
-use crate::physics::UPDATE_COLLISION_SHAPES;
+use crate::physics::{FixedOffset, Velocity, UPDATE_COLLISION_SHAPES};
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
 use crate::GameState;
 use bevy::prelude::*;
 use bevy_kira_audio::Audio;
+use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
@@ -43,7 +44,9 @@ impl Plugin for PlayerPlugin {
 }
 
 fn spawn_camera(mut commands: Commands) {
-    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
+    commands
+        .spawn_bundle(OrthographicCameraBundle::new_2d())
+        .insert(Velocity(Vec2::new(0.0, 20.0)));
 }
 
 fn spawn_player(mut commands: Commands) {
@@ -67,39 +70,62 @@ fn spawn_player(mut commands: Commands) {
         });
 }
 
+#[derive(Component)]
+struct RailGraphic;
+
+#[derive(Bundle)]
+struct RailShapeBundle {
+    tag: RailGraphic,
+    #[bundle]
+    shape_bundle: ShapeBundle,
+    offset: FixedOffset,
+}
+
 fn spawn_rail(mut commands: Commands) {
-    let rail_points = vec![Vec2::new(-110.0, -220.0), Vec2::new(110.0, -220.0)];
+    let rail_points = vec![Vec2::new(-110.0, 0.0), Vec2::new(110.0, 0.0)];
     let rail_color = Color::rgb_u8(135, 188, 108);
     let mut segments = vec![];
     let mut points = vec![];
 
-    points.push(GeometryBuilder::build_as(
-        &shapes::Circle {
-            radius: 10.,
-            center: rail_points[0],
-        },
-        DrawMode::Fill(FillMode::color(rail_color)),
-        Transform::from_xyz(0.0, 0.0, 0.0),
-    ));
+    points.push(RailShapeBundle {
+        tag: RailGraphic,
+        shape_bundle: GeometryBuilder::build_as(
+            &shapes::Circle {
+                radius: 10.,
+                center: rail_points[0],
+            },
+            DrawMode::Fill(FillMode::color(rail_color)),
+            Transform::from_xyz(0.0, 0.0, 0.0),
+        ),
+        offset: FixedOffset(Vec2::new(0., -220.)),
+    });
 
     for (point1, point2) in rail_points[..rail_points.len() - 1]
         .iter()
         .zip(rail_points[1..].iter())
     {
-        segments.push(GeometryBuilder::build_as(
-            &shapes::Line(*point1, *point2),
-            DrawMode::Stroke(StrokeMode::new(rail_color, 5.0)),
-            Transform::from_xyz(0.0, 0.0, 0.0),
-        ));
+        segments.push(RailShapeBundle {
+            tag: RailGraphic,
+            shape_bundle: GeometryBuilder::build_as(
+                &shapes::Line(*point1, *point2),
+                DrawMode::Stroke(StrokeMode::new(rail_color, 5.0)),
+                Transform::from_xyz(0.0, 0.0, 0.0),
+            ),
+            offset: FixedOffset(Vec2::new(0., -220.)),
+        });
 
-        points.push(GeometryBuilder::build_as(
-            &shapes::Circle {
-                radius: 10.,
-                center: *point2,
-            },
-            DrawMode::Fill(FillMode::color(rail_color)),
-            Transform::from_xyz(0.0, 0.0, 0.0),
-        ));
+        points.push(RailShapeBundle {
+            tag: RailGraphic,
+            shape_bundle: GeometryBuilder::build_as(
+                &shapes::Circle {
+                    radius: 10.,
+                    center: *point2,
+                },
+                DrawMode::Fill(FillMode::color(rail_color)),
+                Transform::from_xyz(0.0, 0.0, 0.0),
+            ),
+            offset: FixedOffset(Vec2::new(0., -220.)),
+        });
     }
 
     commands.spawn_batch(segments);
@@ -113,25 +139,45 @@ fn spawn_rail(mut commands: Commands) {
 fn move_player(
     time: Res<Time>,
     actions: Res<Actions>,
-    mut player_query: Query<(&mut Transform, &mut RailPosition), With<Player>>,
+    mut player_query: Query<
+        (&mut Transform, &mut RailPosition),
+        (With<Player>, Without<RailGraphic>),
+    >,
     mut clip: Query<&mut BulletClip>,
     rail: Query<&PlayerRail>,
+    rail_graphic: Query<&Transform, With<RailGraphic>>,
     audio_assets: Res<AudioAssets>,
     audio: Res<Audio>,
 ) {
-    if player_query.is_empty() || actions.player_stop {
+    if player_query.is_empty() {
         return;
     }
+
+    if actions.player_stop {
+        let (mut player_transform, _) = player_query.single_mut();
+        let rail_transform = rail_graphic.iter().next().unwrap();
+        player_transform.translation = Vec3::new(
+            player_transform.translation.x,
+            rail_transform.translation.y,
+            player_transform.translation.z,
+        );
+        return;
+    }
+
     let speed = 150.;
 
     let mut clip = clip.single_mut();
+    let rail = rail.single();
     let (mut player_transform, mut rail_position) = player_query.single_mut();
-    let (t, at_node) = rail_position.next_position(&rail.single(), time.delta_seconds(), speed);
+    let (new_translation, at_node) =
+        rail_position.next_position(&rail, time.delta_seconds(), speed);
     if at_node && !clip.is_full() {
         clip.reload();
         audio.play(audio_assets.reload.clone());
     }
-    player_transform.translation = t.extend(0.0);
+    let rail_transform = rail_graphic.iter().next().unwrap();
+    player_transform.translation =
+        new_translation.extend(0.0) + rail_transform.translation.y * Vec3::Y;
 }
 
 fn point_player(actions: Res<Actions>, mut player_query: Query<&mut Transform, With<Player>>) {

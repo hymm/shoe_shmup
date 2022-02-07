@@ -1,6 +1,6 @@
 use crate::{
     constants::{SCREEN_HEIGHT, SCREEN_WIDTH},
-    physics::Velocity,
+    physics::{FixedOffset, Velocity},
     GameState,
 };
 use bevy::prelude::*;
@@ -64,12 +64,18 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
     }
 }
 
-fn despawn_bullet(mut commands: Commands, bullets: Query<(Entity, &Transform), With<Bullet>>) {
+fn despawn_bullet(
+    mut commands: Commands,
+    bullets: Query<(Entity, &Transform), With<Bullet>>,
+    camera: Query<&Transform, (With<Camera>, With<Velocity>)>,
+) {
+    let camera_transform = camera.single();
     for (e, t) in bullets.iter() {
-        if t.translation.x > SCREEN_WIDTH / 2.0
-            || t.translation.x < -SCREEN_WIDTH / 2.0
-            || t.translation.y > SCREEN_HEIGHT / 2.0
-            || t.translation.y < -SCREEN_HEIGHT / 2.0
+        let t = t.translation - camera_transform.translation.y * Vec3::Y;
+        if t.x > SCREEN_WIDTH / 2.0
+            || t.x < -SCREEN_WIDTH / 2.0
+            || t.y > SCREEN_HEIGHT / 2.0
+            || t.y < -SCREEN_HEIGHT / 2.0
         {
             commands.entity(e).despawn();
         }
@@ -84,6 +90,7 @@ struct BulletClipGraphicBundle {
     tag: BulletClipGraphic,
     #[bundle]
     shape_bundle: ShapeBundle,
+    offset: FixedOffset,
 }
 
 fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
@@ -98,6 +105,7 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
                     DrawMode::Stroke(StrokeMode::new(Color::rgb_u8(0, 0, 0), 2.)),
                     Transform::default(),
                 ),
+                offset: FixedOffset(Vec2::new(0., 0.)),
             };
         })
         .collect()

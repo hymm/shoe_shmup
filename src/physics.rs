@@ -21,14 +21,33 @@ fn update_shape_transforms(
     }
 }
 
+// Marks entity as fixed in relation to the camera
+#[derive(Component)]
+pub struct FixedOffset(pub Vec2);
+
+fn update_fixed_position(
+    camera: Query<&Transform, (With<Camera>, With<Velocity>)>,
+    mut fixed_entities: Query<(&mut Transform, &FixedOffset), Without<Camera>>,
+) {
+    if camera.is_empty() {
+        return;
+    }
+    let camera_transform = camera.single();
+    for (mut t, offset) in fixed_entities.iter_mut() {
+        t.translation = camera_transform.translation + offset.0.extend(0.0);
+    }
+}
+
 pub struct PhysicsPlugin;
 impl Plugin for PhysicsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(update_position).add_system_to_stage(
-            CoreStage::PostUpdate,
-            update_shape_transforms
-                .label(UPDATE_COLLISION_SHAPES)
-                .after(TransformSystem::TransformPropagate),
-        );
+        app.add_system(update_position)
+            .add_system(update_fixed_position)
+            .add_system_to_stage(
+                CoreStage::PostUpdate,
+                update_shape_transforms
+                    .label(UPDATE_COLLISION_SHAPES)
+                    .after(TransformSystem::TransformPropagate),
+            );
     }
 }

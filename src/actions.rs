@@ -1,4 +1,4 @@
-use crate::GameState;
+use crate::{physics::Velocity, GameState};
 use bevy::prelude::*;
 
 pub struct ActionsPlugin;
@@ -37,12 +37,16 @@ fn set_movement_actions(
 fn set_point_actions(
     mut actions: ResMut<Actions>,
     mut cursor_pos: EventReader<CursorMoved>,
+    camera: Query<&Transform, (With<Camera>, With<Velocity>)>,
     wnds: Res<Windows>,
 ) {
     let wnd = wnds.get_primary().unwrap();
     for position in cursor_pos.iter() {
+        let transform = camera.single();
+        // convert cursor_pos into world coordinates
         let size = Vec2::new(wnd.width() as f32, wnd.height() as f32);
-        actions.player_point = Some(position.position - size / 2.0);
+        actions.player_point =
+            Some(position.position - size / 2.0 + transform.translation.truncate());
     }
 }
 
@@ -56,71 +60,4 @@ fn set_shoot_action(
     } else {
         false
     };
-}
-
-enum GameControl {
-    Up,
-    Down,
-    Left,
-    Right,
-}
-
-impl GameControl {
-    fn just_released(&self, keyboard_input: &Res<Input<KeyCode>>) -> bool {
-        match self {
-            GameControl::Up => {
-                keyboard_input.just_released(KeyCode::W)
-                    || keyboard_input.just_released(KeyCode::Up)
-            }
-            GameControl::Down => {
-                keyboard_input.just_released(KeyCode::S)
-                    || keyboard_input.just_released(KeyCode::Down)
-            }
-            GameControl::Left => {
-                keyboard_input.just_released(KeyCode::A)
-                    || keyboard_input.just_released(KeyCode::Left)
-            }
-            GameControl::Right => {
-                keyboard_input.just_released(KeyCode::D)
-                    || keyboard_input.just_released(KeyCode::Right)
-            }
-        }
-    }
-
-    fn pressed(&self, keyboard_input: &Res<Input<KeyCode>>) -> bool {
-        match self {
-            GameControl::Up => {
-                keyboard_input.pressed(KeyCode::W) || keyboard_input.pressed(KeyCode::Up)
-            }
-            GameControl::Down => {
-                keyboard_input.pressed(KeyCode::S) || keyboard_input.pressed(KeyCode::Down)
-            }
-            GameControl::Left => {
-                keyboard_input.pressed(KeyCode::A) || keyboard_input.pressed(KeyCode::Left)
-            }
-            GameControl::Right => {
-                keyboard_input.pressed(KeyCode::D) || keyboard_input.pressed(KeyCode::Right)
-            }
-        }
-    }
-
-    fn just_pressed(&self, keyboard_input: &Res<Input<KeyCode>>) -> bool {
-        match self {
-            GameControl::Up => {
-                keyboard_input.just_pressed(KeyCode::W) || keyboard_input.just_pressed(KeyCode::Up)
-            }
-            GameControl::Down => {
-                keyboard_input.just_pressed(KeyCode::S)
-                    || keyboard_input.just_pressed(KeyCode::Down)
-            }
-            GameControl::Left => {
-                keyboard_input.just_pressed(KeyCode::A)
-                    || keyboard_input.just_pressed(KeyCode::Left)
-            }
-            GameControl::Right => {
-                keyboard_input.just_pressed(KeyCode::D)
-                    || keyboard_input.just_pressed(KeyCode::Right)
-            }
-        }
-    }
 }
