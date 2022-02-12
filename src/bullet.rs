@@ -141,7 +141,7 @@ pub struct BulletPlugin;
 impl Plugin for BulletPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<SpawnBullet>()
-            .add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_bullet_clip))
+            .add_system_set(SystemSet::on_exit(GameState::Menu).with_system(spawn_bullet_clip))
             .add_system_set(
                 SystemSet::on_update(GameState::Playing)
                     .with_system(spawn_bullet)

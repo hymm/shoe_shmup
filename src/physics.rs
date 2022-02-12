@@ -2,6 +2,8 @@ use bevy::prelude::*;
 use bevy::transform::TransformSystem;
 use impacted::CollisionShape;
 
+use crate::GameState;
+
 pub const UPDATE_COLLISION_SHAPES: &str = "update_collision_shapes";
 
 #[derive(Component)]
@@ -41,13 +43,16 @@ fn update_fixed_position(
 pub struct PhysicsPlugin;
 impl Plugin for PhysicsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(update_position)
-            .add_system(update_fixed_position)
-            .add_system_to_stage(
-                CoreStage::PostUpdate,
-                update_shape_transforms
-                    .label(UPDATE_COLLISION_SHAPES)
-                    .after(TransformSystem::TransformPropagate),
-            );
+        app.add_system_set(
+            SystemSet::on_update(GameState::Playing)
+                .with_system(update_position)
+                .with_system(update_fixed_position),
+        )
+        .add_system_to_stage(
+            CoreStage::PostUpdate,
+            update_shape_transforms
+                .label(UPDATE_COLLISION_SHAPES)
+                .after(TransformSystem::TransformPropagate),
+        );
     }
 }

@@ -10,6 +10,8 @@ struct PauseMenu;
 
 #[derive(Component)]
 struct ExitButton;
+#[derive(Component)]
+struct CloseButton;
 
 fn setup_pause_menu(
     mut commands: Commands,
@@ -33,35 +35,85 @@ fn setup_pause_menu(
         .id();
 
     commands.entity(node_entity).with_children(|parent| {
-        parent
-            .spawn_bundle(ButtonBundle {
-                style: Style {
-                    size: Size::new(Val::Px(120.0), Val::Px(50.0)),
-                    justify_content: JustifyContent::Center,
-                    align_items: AlignItems::Center,
-                    ..Default::default()
-                },
-                color: button_colors.normal,
+        let button_bundle = ButtonBundle {
+            style: Style {
+                size: Size::new(Val::Px(120.0), Val::Px(50.0)),
+                justify_content: JustifyContent::Center,
+                align_items: AlignItems::Center,
                 ..Default::default()
-            })
+            },
+            color: button_colors.normal,
+            ..Default::default()
+        };
+
+        let text_style = TextStyle {
+            font: font_assets.fira_sans.clone(),
+            font_size: 40.0,
+            color: Color::rgb(0.9, 0.9, 0.9),
+        };
+        parent
+            .spawn_bundle(button_bundle.clone())
             .insert(ExitButton)
+            .insert(PauseMenu)
             .with_children(|parent| {
-                parent.spawn_bundle(TextBundle {
-                    text: Text {
-                        sections: vec![TextSection {
-                            value: "Exit".to_string(),
-                            style: TextStyle {
-                                font: font_assets.fira_sans.clone(),
-                                font_size: 40.0,
-                                color: Color::rgb(0.9, 0.9, 0.9),
-                            },
-                        }],
-                        alignment: Default::default(),
-                    },
-                    ..Default::default()
-                });
+                parent
+                    .spawn_bundle(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection {
+                                value: "Exit".to_string(),
+                                style: text_style.clone(),
+                            }],
+                            alignment: Default::default(),
+                        },
+                        ..Default::default()
+                    })
+                    .insert(PauseMenu);
+            });
+
+        parent
+            .spawn_bundle(button_bundle.clone())
+            // .insert(CloseButton)
+            .insert(PauseMenu)
+            .with_children(|parent| {
+                parent
+                    .spawn_bundle(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection {
+                                value: "Save".to_string(),
+                                style: text_style.clone(),
+                            }],
+                            alignment: Default::default(),
+                        },
+                        ..Default::default()
+                    })
+                    .insert(PauseMenu);
+            });
+
+        parent
+            .spawn_bundle(button_bundle.clone())
+            .insert(CloseButton)
+            .insert(PauseMenu)
+            .with_children(|parent| {
+                parent
+                    .spawn_bundle(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection {
+                                value: "Close".to_string(),
+                                style: text_style.clone(),
+                            }],
+                            alignment: Default::default(),
+                        },
+                        ..Default::default()
+                    })
+                    .insert(PauseMenu);
             });
     });
+}
+
+fn despawn_pause_menu(mut commands: Commands, q: Query<Entity, With<PauseMenu>>) {
+    for e in q.iter() {
+        commands.entity(e).despawn();
+    }
 }
 
 fn pause(keyboard_input: Res<Input<KeyCode>>, mut game_state: ResMut<State<GameState>>) {
@@ -70,22 +122,47 @@ fn pause(keyboard_input: Res<Input<KeyCode>>, mut game_state: ResMut<State<GameS
     }
 }
 
-fn click_exit_button(
+fn hover_button(
     button_colors: Res<ButtonColors>,
     mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<Button>)>,
-    mut app_exit_events: EventWriter<AppExit>,
 ) {
     for (_button, interaction, mut color, _children) in interaction_query.iter_mut() {
         match *interaction {
-            Interaction::Clicked => {
-                app_exit_events.send(AppExit);
-            }
             Interaction::Hovered => {
                 *color = button_colors.hovered;
             }
             Interaction::None => {
                 *color = button_colors.normal;
             }
+            _ => {}
+        }
+    }
+}
+
+fn click_exit_button(
+    mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<ExitButton>)>,
+    mut app_exit_events: EventWriter<AppExit>,
+) {
+    for (_button, interaction, _color, _children) in interaction_query.iter_mut() {
+        match *interaction {
+            Interaction::Clicked => {
+                app_exit_events.send(AppExit);
+            }
+            _ => {}
+        }
+    }
+}
+
+fn click_close_button(
+    mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<CloseButton>)>,
+    mut game_state: ResMut<State<GameState>>,
+) {
+    for (_button, interaction, mut _color, _children) in interaction_query.iter_mut() {
+        match *interaction {
+            Interaction::Clicked => {
+                game_state.set(GameState::Playing).unwrap();
+            }
+            _ => {}
         }
     }
 }
@@ -94,7 +171,13 @@ pub struct PauseMenuPlugin;
 impl Plugin for PauseMenuPlugin {
     fn build(&self, app: &mut App) {
         app.add_system_set(SystemSet::on_enter(GameState::Paused).with_system(setup_pause_menu))
-            .add_system_set(SystemSet::on_update(GameState::Paused).with_system(click_exit_button))
+            .add_system_set(
+                SystemSet::on_update(GameState::Paused)
+                    .with_system(click_exit_button)
+                    .with_system(hover_button)
+                    .with_system(click_close_button),
+            )
+            .add_system_set(SystemSet::on_exit(GameState::Paused).with_system(despawn_pause_menu))
             .add_system_set(SystemSet::on_update(GameState::Playing).with_system(pause));
     }
 }

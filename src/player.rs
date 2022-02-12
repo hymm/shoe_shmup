@@ -22,7 +22,7 @@ impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugin(ShapePlugin)
             .add_system_set(
-                SystemSet::on_enter(GameState::Playing)
+                SystemSet::on_exit(GameState::Menu)
                     .with_system(spawn_player)
                     .with_system(spawn_camera)
                     .with_system(spawn_rail),
