@@ -98,7 +98,7 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
     (0..num_bullets)
         .map(|i| {
             let point = Vec2::new(start_point.x, start_point.y) + i as f32 * Vec2::new(3., 0.);
-            return BulletClipGraphicBundle {
+            BulletClipGraphicBundle {
                 tag: BulletClipGraphic,
                 shape_bundle: GeometryBuilder::build_as(
                     &shapes::Line(point, point + Vec2::new(0.0, -8.0)),
@@ -106,7 +106,7 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
                     Transform::default(),
                 ),
                 offset: FixedOffset(Vec2::new(0., 0.)),
-            };
+            }
         })
         .collect()
 }

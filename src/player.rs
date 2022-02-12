@@ -85,9 +85,7 @@ fn spawn_rail(mut commands: Commands) {
     let rail_points = vec![Vec2::new(-110.0, 0.0), Vec2::new(110.0, 0.0)];
     let rail_color = Color::rgb_u8(135, 188, 108);
     let mut segments = vec![];
-    let mut points = vec![];
-
-    points.push(RailShapeBundle {
+    let mut points = vec![RailShapeBundle {
         tag: RailGraphic,
         shape_bundle: GeometryBuilder::build_as(
             &shapes::Circle {
@@ -98,7 +96,7 @@ fn spawn_rail(mut commands: Commands) {
             Transform::from_xyz(0.0, 0.0, 0.0),
         ),
         offset: FixedOffset(Vec2::new(0., -220.)),
-    });
+    }];
 
     for (point1, point2) in rail_points[..rail_points.len() - 1]
         .iter()
@@ -170,7 +168,7 @@ fn move_player(
     let rail = rail.single();
     let (mut player_transform, mut rail_position) = player_query.single_mut();
     let (new_translation, at_node) =
-        rail_position.next_position(&rail, time.delta_seconds(), speed);
+        rail_position.next_position(rail, time.delta_seconds(), speed);
     if at_node && !clip.is_full() {
         clip.reload();
         audio.play(audio_assets.reload.clone());
@@ -205,7 +203,7 @@ fn player_shoot(
         let mut clip = clip.single_mut();
         if clip.try_shoot() {
             spawn_bullet.send(SpawnBullet {
-                initial_transform: t.clone(),
+                initial_transform: *t,
             });
             audio.play(asset_server.load("audio/shoot.wav"));
         } else {

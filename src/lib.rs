@@ -1,3 +1,6 @@
+#![allow(clippy::too_many_arguments)]
+#![allow(clippy::type_complexity)]
+
 mod actions;
 mod audio;
 mod bullet;
@@ -9,6 +12,7 @@ mod pause_menu;
 mod physics;
 mod player;
 mod player_rail;
+mod serialize;
 
 use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
