@@ -1,8 +1,13 @@
-use bevy::app::AppExit;
+use bevy::app::{AppExit, Events};
+use bevy::ecs::schedule::ShouldRun;
+use bevy::ecs::system::{SystemParam, SystemState};
 use bevy::prelude::*;
+use bevy::reflect::TypeRegistry;
 
+use crate::enemy::Enemy;
 use crate::loading::FontAssets;
 use crate::menu::{ButtonColors, ButtonInteraction};
+use crate::serialize::scene_from_entities;
 use crate::GameState;
 
 #[derive(Component)]
@@ -12,6 +17,10 @@ struct PauseMenu;
 struct ExitButton;
 #[derive(Component)]
 struct CloseButton;
+#[derive(Component)]
+struct SaveButton;
+#[derive(Component)]
+struct SaveSceneEvent;
 
 fn setup_pause_menu(
     mut commands: Commands,
@@ -72,7 +81,7 @@ fn setup_pause_menu(
 
         parent
             .spawn_bundle(button_bundle.clone())
-            // .insert(CloseButton)
+            .insert(SaveButton)
             .insert(PauseMenu)
             .with_children(|parent| {
                 parent
@@ -90,7 +99,7 @@ fn setup_pause_menu(
             });
 
         parent
-            .spawn_bundle(button_bundle.clone())
+            .spawn_bundle(button_bundle)
             .insert(CloseButton)
             .insert(PauseMenu)
             .with_children(|parent| {
@@ -144,11 +153,8 @@ fn click_exit_button(
     mut app_exit_events: EventWriter<AppExit>,
 ) {
     for (_button, interaction, _color, _children) in interaction_query.iter_mut() {
-        match *interaction {
-            Interaction::Clicked => {
-                app_exit_events.send(AppExit);
-            }
-            _ => {}
+        if *interaction == Interaction::Clicked {
+            app_exit_events.send(AppExit);
         }
     }
 }
@@ -158,13 +164,45 @@ fn click_close_button(
     mut game_state: ResMut<State<GameState>>,
 ) {
     for (_button, interaction, mut _color, _children) in interaction_query.iter_mut() {
-        match *interaction {
-            Interaction::Clicked => {
-                game_state.set(GameState::Playing).unwrap();
-            }
-            _ => {}
+        if *interaction == Interaction::Clicked {
+            game_state.set(GameState::Playing).unwrap();
         }
     }
+}
+
+fn click_save_button(
+    mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<SaveButton>)>,
+    mut save_scene: EventWriter<SaveSceneEvent>,
+) {
+    for (_button, interaction, mut _color, _children) in interaction_query.iter_mut() {
+        if *interaction == Interaction::Clicked {
+            save_scene.send(SaveSceneEvent);
+        }
+    }
+}
+// TODO: move to serialize file
+fn has_save_event(mut e: EventReader<SaveSceneEvent>) -> ShouldRun {
+    let mut result = ShouldRun::No;
+    // iterate over all events to drain
+    for _ in e.iter() {
+        result = ShouldRun::Yes;
+    }
+    result
+}
+
+#[derive(SystemParam)]
+struct SceneParam<'w, 's> {
+    enemies: Query<'w, 's, Entity, With<Enemy>>,
+}
+
+fn save_scene(world: &mut World) {
+    let mut state = SystemState::<SceneParam>::new(world);
+    let scene_params = state.get_mut(world);
+    let enemies = scene_params.enemies.iter().collect();
+
+    let type_registry = world.get_resource::<TypeRegistry>().unwrap();
+    let scene = scene_from_entities(world, type_registry, enemies);
+    info!("{}", scene.serialize_ron(type_registry).unwrap());
 }
 
 pub struct PauseMenuPlugin;
@@ -175,9 +213,16 @@ impl Plugin for PauseMenuPlugin {
                 SystemSet::on_update(GameState::Paused)
                     .with_system(click_exit_button)
                     .with_system(hover_button)
-                    .with_system(click_close_button),
+                    .with_system(click_close_button)
+                    .with_system(click_save_button),
+            )
+            .add_system(
+                save_scene
+                    .exclusive_system()
+                    .with_run_criteria(has_save_event),
             )
             .add_system_set(SystemSet::on_exit(GameState::Paused).with_system(despawn_pause_menu))
-            .add_system_set(SystemSet::on_update(GameState::Playing).with_system(pause));
+            .add_system_set(SystemSet::on_update(GameState::Playing).with_system(pause))
+            .add_event::<SaveSceneEvent>();
     }
 }
