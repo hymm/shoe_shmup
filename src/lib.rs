@@ -5,6 +5,7 @@ mod constants;
 mod enemy;
 mod loading;
 mod menu;
+mod pause_menu;
 mod physics;
 mod player;
 mod player_rail;
@@ -16,6 +17,7 @@ pub use crate::constants::{SCREEN_HEIGHT, SCREEN_WIDTH};
 use crate::enemy::EnemyPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
+use crate::pause_menu::PauseMenuPlugin;
 use crate::physics::PhysicsPlugin;
 use crate::player::PlayerPlugin;
 
@@ -35,6 +37,8 @@ enum GameState {
     Playing,
     // Here the menu is drawn and waiting for player interaction
     Menu,
+    Paused,
+    Player_Dead,
 }
 
 pub struct GamePlugin;
@@ -49,7 +53,8 @@ impl Plugin for GamePlugin {
             .add_plugin(PlayerPlugin)
             .add_plugin(PhysicsPlugin)
             .add_plugin(BulletPlugin)
-            .add_plugin(EnemyPlugin);
+            .add_plugin(EnemyPlugin)
+            .add_plugin(PauseMenuPlugin);
 
         #[cfg(debug_assertions)]
         {

@@ -16,9 +16,9 @@ impl Plugin for MenuPlugin {
     }
 }
 
-struct ButtonColors {
-    normal: UiColor,
-    hovered: UiColor,
+pub struct ButtonColors {
+    pub normal: UiColor,
+    pub hovered: UiColor,
 }
 
 impl Default for ButtonColors {
@@ -70,7 +70,7 @@ fn setup_menu(
         });
 }
 
-type ButtonInteraction<'a> = (Entity, &'a Interaction, &'a mut UiColor, &'a Children);
+pub type ButtonInteraction<'a> = (Entity, &'a Interaction, &'a mut UiColor, &'a Children);
 
 fn click_play_button(
     mut commands: Commands,
