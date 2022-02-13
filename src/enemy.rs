@@ -100,7 +100,7 @@ impl Plugin for EnemyPlugin {
                 check_collisions_with_bullets.after(UPDATE_COLLISION_SHAPES),
             )
             .add_system_set(
-                SystemSet::on_enter(GameState::PostLoad).with_system(after_deserialize_enemy),
+                SystemSet::on_enter(GameState::PostLoadLevel).with_system(after_deserialize_enemy),
             );
     }
 }

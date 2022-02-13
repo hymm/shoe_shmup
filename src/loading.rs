@@ -10,15 +10,15 @@ pub struct LoadingPlugin;
 /// If interested, take a look at https://bevy-cheatbook.github.io/features/assets.html
 impl Plugin for LoadingPlugin {
     fn build(&self, app: &mut App) {
-        AssetLoader::new(GameState::Loading)
+        AssetLoader::new(GameState::LoadingAssets)
             .with_collection::<FontAssets>()
             .with_collection::<AudioAssets>()
             .with_collection::<TextureAssets>()
-            .continue_to_state(GameState::PostLoad)
+            .continue_to_state(GameState::PostLoadLevel)
             .build(app);
 
         app.add_system_set(
-            SystemSet::on_update(GameState::PostLoad).with_system(transition_to_playing),
+            SystemSet::on_update(GameState::PostLoadLevel).with_system(transition_to_playing),
         );
     }
 }

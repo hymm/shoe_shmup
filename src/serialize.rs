@@ -1,38 +1,68 @@
 use bevy::ecs::schedule::ShouldRun;
-use bevy::ecs::system::{SystemParam, SystemState};
+use bevy::ecs::system::{SystemParam, SystemState, CommandQueue};
 use bevy::prelude::*;
+use bevy::reflect::TypeRegistry;
 use bevy::reflect::TypeRegistryArc;
 use bevy::scene::DynamicEntity;
-use bevy::reflect::TypeRegistry;
+use bevy::tasks::{IoTaskPool, Task};
+use tokio::fs;
+use async_compat::Compat;
+use futures_lite::future;
 
 use crate::enemy::Enemy;
-
 
 pub struct SaveSceneEvent;
 
 // TODO: move to serialize file
 fn has_save_event(mut e: EventReader<SaveSceneEvent>) -> ShouldRun {
-  let mut result = ShouldRun::No;
-  // iterate over all events to drain
-  for _ in e.iter() {
-      result = ShouldRun::Yes;
-  }
-  result
+    let mut result = ShouldRun::No;
+    // iterate over all events to drain
+    for _ in e.iter() {
+        result = ShouldRun::Yes;
+    }
+    result
 }
 
 #[derive(SystemParam)]
 struct SceneParam<'w, 's> {
-  enemies: Query<'w, 's, Entity, With<Enemy>>,
+    enemies: Query<'w, 's, Entity, With<Enemy>>,
 }
 
-fn save_scene(world: &mut World) {
-  let mut state = SystemState::<SceneParam>::new(world);
-  let scene_params = state.get_mut(world);
-  let enemies = scene_params.enemies.iter().collect();
+#[derive(Component)]
+struct SaveTask(pub Task<()>);
 
-  let type_registry = world.get_resource::<TypeRegistry>().unwrap();
-  let scene = scene_from_entities(world, type_registry, enemies);
-  info!("{}", scene.serialize_ron(type_registry).unwrap());
+fn save_scene(world: &mut World) {
+    let mut state = SystemState::<SceneParam>::new(world);
+    let scene_params = state.get_mut(world);
+    let enemies = scene_params.enemies.iter().collect();
+
+    let type_registry = world.get_resource::<TypeRegistry>().unwrap();
+    let scene = scene_from_entities(world, type_registry, enemies);
+    let scene = scene.serialize_ron(type_registry).unwrap();
+    let task_pool = world.get_resource::<IoTaskPool>().unwrap();
+    let task = Compat::new(async {
+        let result = fs::write("assets/levels/temp.ron", scene).await;
+        if let Err(error) = result {
+            dbg!(error);
+        } else {
+            dbg!("saved");
+        }
+    });
+    dbg!("try save");
+    let task = task_pool.spawn(task);
+
+    let mut entity = world.spawn();
+    entity.insert(SaveTask(task));
+}
+
+fn handle_save_task(
+    mut commands: Commands,
+    mut save_task: Query<(Entity, &mut SaveTask)>,
+) {
+    if let Ok((entity, mut task)) = save_task.get_single_mut() {
+        future::block_on(future::poll_once(&mut task.0));
+        commands.entity(entity).despawn();
+    }
 }
 
 pub fn scene_from_entities(
@@ -63,7 +93,12 @@ pub fn scene_from_entities(
                 .and_then(|info| type_registry.get(info.type_id().unwrap()))
                 .and_then(|registration| registration.data::<ReflectComponent>());
             if let Some(reflect_component) = reflect_component {
-                for (i, entity) in archetype.entities().iter().filter(|e| entities.contains(e)).enumerate() {
+                for (i, entity) in archetype
+                    .entities()
+                    .iter()
+                    .filter(|e| entities.contains(e))
+                    .enumerate()
+                {
                     if let Some(component) = reflect_component.reflect_component(world, *entity) {
                         scene.entities[entities_offset + i]
                             .components
@@ -80,12 +115,11 @@ pub fn scene_from_entities(
 pub struct SerializePlugin;
 impl Plugin for SerializePlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_system(
-                save_scene
-                    .exclusive_system()
-                    .with_run_criteria(has_save_event),
-            )
-            .add_event::<SaveSceneEvent>();
+        app.add_system(
+            save_scene
+                .exclusive_system()
+                .with_run_criteria(has_save_event),
+        ).add_system(handle_save_task)
+        .add_event::<SaveSceneEvent>();
     }
 }

@@ -37,9 +37,11 @@ use bevy::{app::App, diagnostic::EntityCountDiagnosticsPlugin};
 #[derive(Clone, Eq, PartialEq, Debug, Hash)]
 enum GameState {
     // During the loading State the LoadingPlugin will load our assets
-    Loading,
+    LoadingAssets,
+    // load level from scene file
+    LoadLevel,
     // massage data loaded from a scene file
-    PostLoad,
+    PostLoadLevel,
     // During this State the actual game logic is executed
     Playing,
     // Here the menu is drawn and waiting for player interaction
@@ -52,7 +54,7 @@ pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_state(GameState::Loading)
+        app.add_state(GameState::LoadingAssets)
             .add_plugin(LoadingPlugin)
             .add_plugin(MenuPlugin)
             .add_plugin(ActionsPlugin)
