@@ -24,6 +24,7 @@ use crate::menu::MenuPlugin;
 use crate::pause_menu::PauseMenuPlugin;
 use crate::physics::PhysicsPlugin;
 use crate::player::PlayerPlugin;
+use crate::serialize::SerializePlugin;
 
 #[cfg(debug_assertions)]
 use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
@@ -37,12 +38,14 @@ use bevy::{app::App, diagnostic::EntityCountDiagnosticsPlugin};
 enum GameState {
     // During the loading State the LoadingPlugin will load our assets
     Loading,
+    // massage data loaded from a scene file
+    PostLoad,
     // During this State the actual game logic is executed
     Playing,
     // Here the menu is drawn and waiting for player interaction
     Menu,
     Paused,
-    Player_Dead,
+    PlayerDead,
 }
 
 pub struct GamePlugin;
@@ -58,7 +61,8 @@ impl Plugin for GamePlugin {
             .add_plugin(PhysicsPlugin)
             .add_plugin(BulletPlugin)
             .add_plugin(EnemyPlugin)
-            .add_plugin(PauseMenuPlugin);
+            .add_plugin(PauseMenuPlugin)
+            .add_plugin(SerializePlugin);
 
         #[cfg(debug_assertions)]
         {

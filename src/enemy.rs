@@ -10,7 +10,8 @@ use impacted::CollisionShape;
 
 const ENEMY_LENGTH: f32 = 30.;
 
-#[derive(Component)]
+#[derive(Component, Default, Reflect)]
+#[reflect(Component)]
 pub(crate) struct Enemy;
 
 #[derive(Bundle)]
@@ -52,6 +53,17 @@ fn spawn_enemy(mut commands: Commands) {
     commands.spawn_batch(bundles);
 }
 
+fn after_deserialize_enemy(
+    mut commands: Commands,
+    q: Query<(Entity, &Transform), (With<Enemy>, Without<CollisionShape>)>,
+) {
+    for (entity, transform) in q.iter() {
+        commands
+            .entity(entity)
+            .insert_bundle(EnemyBundle::new(*transform));
+    }
+}
+
 fn check_collisions_with_bullets(
     mut commands: Commands,
     bullets: Query<(Entity, &CollisionShape), (With<Bullet>, Without<Enemy>)>,
@@ -81,10 +93,14 @@ fn check_collisions_with_bullets(
 pub struct EnemyPlugin;
 impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_enemy))
+        app.register_type::<Enemy>()
+            .add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_enemy))
             .add_system_to_stage(
                 CoreStage::PostUpdate,
                 check_collisions_with_bullets.after(UPDATE_COLLISION_SHAPES),
+            )
+            .add_system_set(
+                SystemSet::on_enter(GameState::PostLoad).with_system(after_deserialize_enemy),
             );
     }
 }

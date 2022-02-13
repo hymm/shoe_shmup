@@ -38,13 +38,13 @@ fn set_point_actions(
     mut actions: ResMut<Actions>,
     mut cursor_pos: EventReader<CursorMoved>,
     camera: Query<&Transform, (With<Camera>, With<Velocity>)>,
-    wnds: Res<Windows>,
+    windows: Res<Windows>,
 ) {
-    let wnd = wnds.get_primary().unwrap();
+    let window = windows.get_primary().unwrap();
     for position in cursor_pos.iter() {
         let transform = camera.single();
         // convert cursor_pos into world coordinates
-        let size = Vec2::new(wnd.width() as f32, wnd.height() as f32);
+        let size = Vec2::new(window.width() as f32, window.height() as f32);
         actions.player_point =
             Some(position.position - size / 2.0 + transform.translation.truncate());
     }
