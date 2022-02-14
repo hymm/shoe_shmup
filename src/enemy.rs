@@ -39,28 +39,18 @@ impl EnemyBundle {
     }
 }
 
-fn spawn_enemy(mut commands: Commands) {
-    let mut bundles = vec![];
-    for x in 0..7 {
-        for y in 0..5 {
-            bundles.push(EnemyBundle::new(Transform::from_xyz(
-                -105.0 + x as f32 * (ENEMY_LENGTH + 5.0),
-                220.0 - y as f32 * (ENEMY_LENGTH + 5.0),
-                1.0,
-            )))
-        }
-    }
-    commands.spawn_batch(bundles);
-}
-
 fn after_deserialize_enemy(
     mut commands: Commands,
     q: Query<(Entity, &Transform), (With<Enemy>, Without<CollisionShape>)>,
+    mut state: ResMut<State<GameState>>,
 ) {
-    for (entity, transform) in q.iter() {
-        commands
-            .entity(entity)
-            .insert_bundle(EnemyBundle::new(*transform));
+    if !q.is_empty() {
+        state.set(GameState::Playing).unwrap();
+        for (entity, transform) in q.iter() {
+            commands
+                .entity(entity)
+                .insert_bundle(EnemyBundle::new(*transform));
+        }
     }
 }
 
@@ -94,13 +84,13 @@ pub struct EnemyPlugin;
 impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {
         app.register_type::<Enemy>()
-            .add_system_set(SystemSet::on_enter(GameState::Playing).with_system(spawn_enemy))
             .add_system_to_stage(
                 CoreStage::PostUpdate,
                 check_collisions_with_bullets.after(UPDATE_COLLISION_SHAPES),
             )
             .add_system_set(
-                SystemSet::on_enter(GameState::PostLoadLevel).with_system(after_deserialize_enemy),
+                SystemSet::on_update(GameState::PostLoadLevel)
+                    .with_system(after_deserialize_enemy),
             );
     }
 }

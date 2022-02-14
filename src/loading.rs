@@ -14,17 +14,9 @@ impl Plugin for LoadingPlugin {
             .with_collection::<FontAssets>()
             .with_collection::<AudioAssets>()
             .with_collection::<TextureAssets>()
-            .continue_to_state(GameState::PostLoadLevel)
+            .continue_to_state(GameState::Menu)
             .build(app);
-
-        app.add_system_set(
-            SystemSet::on_update(GameState::PostLoadLevel).with_system(transition_to_playing),
-        );
     }
-}
-
-fn transition_to_playing(mut state: ResMut<State<GameState>>) {
-    state.set(GameState::Menu).unwrap();
 }
 
 // the following asset collections will be loaded during the State `GameState::Loading`
@@ -55,4 +47,3 @@ pub struct TextureAssets {
     #[asset(path = "textures/bevy.png")]
     pub texture_bevy: Handle<Image>,
 }
-

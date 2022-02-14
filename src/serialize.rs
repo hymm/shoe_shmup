@@ -1,15 +1,16 @@
+use async_compat::Compat;
 use bevy::ecs::schedule::ShouldRun;
-use bevy::ecs::system::{SystemParam, SystemState, CommandQueue};
+use bevy::ecs::system::{CommandQueue, SystemParam, SystemState};
 use bevy::prelude::*;
 use bevy::reflect::TypeRegistry;
 use bevy::reflect::TypeRegistryArc;
 use bevy::scene::DynamicEntity;
 use bevy::tasks::{IoTaskPool, Task};
-use tokio::fs;
-use async_compat::Compat;
 use futures_lite::future;
+use tokio::fs;
 
 use crate::enemy::Enemy;
+use crate::GameState;
 
 pub struct SaveSceneEvent;
 
@@ -55,10 +56,7 @@ fn save_scene(world: &mut World) {
     entity.insert(SaveTask(task));
 }
 
-fn handle_save_task(
-    mut commands: Commands,
-    mut save_task: Query<(Entity, &mut SaveTask)>,
-) {
+fn handle_save_task(mut commands: Commands, mut save_task: Query<(Entity, &mut SaveTask)>) {
     if let Ok((entity, mut task)) = save_task.get_single_mut() {
         future::block_on(future::poll_once(&mut task.0));
         commands.entity(entity).despawn();
@@ -112,6 +110,16 @@ pub fn scene_from_entities(
     scene
 }
 
+fn load_scene(
+    asset_server: Res<AssetServer>,
+    mut scene_spawner: ResMut<SceneSpawner>,
+    mut state: ResMut<State<GameState>>,
+) {
+    let scene_handle = asset_server.load("levels/level1.scn.ron");
+    scene_spawner.spawn_dynamic(scene_handle);
+    state.replace(GameState::PostLoadLevel).unwrap();
+}
+
 pub struct SerializePlugin;
 impl Plugin for SerializePlugin {
     fn build(&self, app: &mut App) {
@@ -119,7 +127,9 @@ impl Plugin for SerializePlugin {
             save_scene
                 .exclusive_system()
                 .with_run_criteria(has_save_event),
-        ).add_system(handle_save_task)
+        )
+        .add_system_set(SystemSet::on_enter(GameState::LoadLevel).with_system(load_scene))
+        .add_system(handle_save_task)
         .add_event::<SaveSceneEvent>();
     }
 }

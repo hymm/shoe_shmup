@@ -85,7 +85,7 @@ fn click_play_button(
             Interaction::Clicked => {
                 commands.entity(button).despawn();
                 commands.entity(text).despawn();
-                state.set(GameState::Playing).unwrap();
+                state.set(GameState::LoadLevel).unwrap();
             }
             Interaction::Hovered => {
                 *color = button_colors.hovered;

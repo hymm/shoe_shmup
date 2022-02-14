@@ -1,9 +1,9 @@
-use bevy::app::{AppExit};
+use bevy::app::AppExit;
 use bevy::prelude::*;
 
 use crate::loading::FontAssets;
 use crate::menu::{ButtonColors, ButtonInteraction};
-use crate::serialize::{SaveSceneEvent};
+use crate::serialize::SaveSceneEvent;
 use crate::GameState;
 
 #[derive(Component)]
