@@ -1,6 +1,6 @@
 use async_compat::Compat;
 use bevy::ecs::schedule::ShouldRun;
-use bevy::ecs::system::{CommandQueue, SystemParam, SystemState};
+use bevy::ecs::system::{SystemParam, SystemState};
 use bevy::prelude::*;
 use bevy::reflect::TypeRegistry;
 use bevy::reflect::TypeRegistryArc;
@@ -59,6 +59,7 @@ fn save_scene(world: &mut World) {
 fn handle_save_task(mut commands: Commands, mut save_task: Query<(Entity, &mut SaveTask)>) {
     if let Ok((entity, mut task)) = save_task.get_single_mut() {
         future::block_on(future::poll_once(&mut task.0));
+        // TODO: this is wrong, only should despawn when task is done.
         commands.entity(entity).despawn();
     }
 }

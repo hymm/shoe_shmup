@@ -168,7 +168,7 @@ fn move_player(
     let rail = rail.single();
     let (mut player_transform, mut rail_position) = player_query.single_mut();
     let (new_translation, at_node) = rail_position.next_position(rail, time.delta_seconds(), speed);
-    if at_node && !clip.is_full() {
+    if at_node && !clip.full() {
         clip.reload();
         audio.play(audio_assets.reload.clone());
     }

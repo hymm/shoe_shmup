@@ -36,7 +36,7 @@ impl BulletClip {
         self.bullets = self.max_size;
     }
 
-    pub fn is_full(&mut self) -> bool {
+    pub fn full(&mut self) -> bool {
         self.bullets >= self.max_size
     }
 }
