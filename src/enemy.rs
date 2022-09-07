@@ -3,7 +3,7 @@ use crate::loading::AudioAssets;
 use crate::physics::UPDATE_COLLISION_SHAPES;
 use crate::GameState;
 use bevy::prelude::*;
-use bevy_kira_audio::Audio;
+use bevy_kira_audio::prelude::*;
 use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;

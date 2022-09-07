@@ -6,7 +6,7 @@ use crate::physics::{FixedOffset, Velocity, UPDATE_COLLISION_SHAPES};
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
 use crate::GameState;
 use bevy::prelude::*;
-use bevy_kira_audio::Audio;
+use bevy_kira_audio::prelude::*;
 use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
@@ -24,7 +24,6 @@ impl Plugin for PlayerPlugin {
             .add_system_set(
                 SystemSet::on_exit(GameState::Menu)
                     .with_system(spawn_player)
-                    .with_system(spawn_camera)
                     .with_system(spawn_rail),
             )
             .add_system_set(
@@ -41,12 +40,6 @@ impl Plugin for PlayerPlugin {
                     .with_system(check_player_collisions_with_enemies),
             );
     }
-}
-
-fn spawn_camera(mut commands: Commands) {
-    commands
-        .spawn_bundle(OrthographicCameraBundle::new_2d())
-        .insert(Velocity(Vec2::new(0.0, 20.0)));
 }
 
 fn spawn_player(mut commands: Commands) {

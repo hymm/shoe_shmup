@@ -98,7 +98,7 @@ pub fn scene_from_entities(
                     .filter(|e| entities.contains(e))
                     .enumerate()
                 {
-                    if let Some(component) = reflect_component.reflect_component(world, *entity) {
+                    if let Some(component) = reflect_component.reflect(world, *entity) {
                         scene.entities[entities_offset + i]
                             .components
                             .push(component.clone_value());
@@ -118,7 +118,7 @@ fn load_scene(
 ) {
     let scene_handle = asset_server.load("levels/level1.scn.ron");
     scene_spawner.spawn_dynamic(scene_handle);
-    state.replace(GameState::PostLoadLevel).unwrap();
+    state.overwrite_replace(GameState::PostLoadLevel).unwrap();
 }
 
 pub struct SerializePlugin;

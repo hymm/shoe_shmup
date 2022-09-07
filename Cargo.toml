@@ -31,12 +31,12 @@ dev = [
 
 [dependencies]
 async-compat = "0.2"
-bevy = { version = "0.7", default-features = false }
-bevy_prototype_lyon = "0.5"
-bevy_kira_audio = { version = "0.9" }
-bevy_asset_loader = { version = "0.10" }
+bevy = { version = "0.8", default-features = false, features = ["bevy_asset", "bevy_scene"] }
+bevy_prototype_lyon = "0.6"
+bevy_kira_audio = { version = "0.12" }
+bevy_asset_loader = { version = "0.12" }
 rand = "0.8.3"
-impacted = { version = "1.4", features = ["bevy-07"] }
+impacted = { version = "1", features = ["bevy-08"] }
 futures-lite = "1.4.0"
 tokio = { version = "1.16", default-features = false, features = ["fs"] }
 

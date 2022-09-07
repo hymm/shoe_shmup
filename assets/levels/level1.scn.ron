@@ -6,35 +6,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-105.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-105.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -67,35 +133,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-105.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-105.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -128,35 +260,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-105.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-105.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -189,35 +387,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-105.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-105.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -250,35 +514,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-105.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-105.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -311,35 +641,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-70.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-70.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -372,35 +768,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-70.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-70.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -433,35 +895,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-70.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-70.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -494,35 +1022,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-70.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-70.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -555,35 +1149,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-70.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-70.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -616,35 +1276,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-35.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-35.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -677,35 +1403,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-35.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-35.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -738,35 +1530,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-35.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-35.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -799,35 +1657,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-35.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-35.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -860,35 +1784,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (-35.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (-35.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -921,35 +1911,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (0.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (0.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -982,35 +2038,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (0.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (0.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1043,35 +2165,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (0.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (0.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1104,35 +2292,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (0.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (0.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1165,35 +2419,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (0.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (0.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1226,35 +2546,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (35.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (35.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1287,35 +2673,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (35.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (35.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1348,35 +2800,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (35.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (35.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1409,35 +2927,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (35.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (35.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1470,35 +3054,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (35.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (35.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1531,35 +3181,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (70.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (70.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1592,35 +3308,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (70.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (70.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1653,35 +3435,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (70.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (70.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1714,35 +3562,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (70.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (70.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1775,35 +3689,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (70.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (70.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1836,35 +3816,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (105.0, 220.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (105.0, 220.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1897,35 +3943,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (105.0, 185.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (105.0, 185.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -1958,35 +4070,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (105.0, 150.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (105.0, 150.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -2019,35 +4197,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (105.0, 115.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (105.0, 115.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
@@ -2080,35 +4324,101 @@
         "type": "bevy_transform::components::transform::Transform",
         "struct": {
           "translation": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (105.0, 80.0, 1.0),
           },
           "rotation": {
-            "type": "glam::quat::Quat",
+            "type": "glam::f32::sse2::quat::Quat",
             "value": (0.0, 0.0, 0.0, 1.0),
           },
           "scale": {
-            "type": "glam::vec3::Vec3",
+            "type": "glam::f32::vec3::Vec3",
             "value": (1.0, 1.0, 1.0),
           },
         },
       },
       {
         "type": "bevy_transform::components::global_transform::GlobalTransform",
-        "struct": {
-          "translation": {
-            "type": "glam::vec3::Vec3",
-            "value": (105.0, 80.0, 1.0),
+        "tuple_struct": [
+          {
+            "type": "glam::f32::affine3a::Affine3A",
+            "struct": {
+              "matrix3": {
+                "type": "glam::f32::sse2::mat3a::Mat3A",
+                "struct": {
+                  "x_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "y_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                    },
+                  },
+                  "z_axis": {
+                    "type": "glam::f32::sse2::vec3a::Vec3A",
+                    "struct": {
+                      "x": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "y": {
+                        "type": "f32",
+                        "value": 0.0,
+                      },
+                      "z": {
+                        "type": "f32",
+                        "value": 1.0,
+                      },
+                    },
+                  },
+                },
+              },
+              "translation": {
+                "type": "glam::f32::sse2::vec3a::Vec3A",
+                "struct": {
+                  "x": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "y": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                  "z": {
+                    "type": "f32",
+                    "value": 0.0,
+                  },
+                },
+              },
+            },
           },
-          "rotation": {
-            "type": "glam::quat::Quat",
-            "value": (0.0, 0.0, 0.0, 1.0),
-          },
-          "scale": {
-            "type": "glam::vec3::Vec3",
-            "value": (1.0, 1.0, 1.0),
-          },
-        },
+        ],
       },
       {
         "type": "shoe_shmup::enemy::Enemy",
