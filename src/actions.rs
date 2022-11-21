@@ -17,7 +17,7 @@ impl Plugin for ActionsPlugin {
     }
 }
 
-#[derive(Default)]
+#[derive(Resource, Default)]
 pub struct Actions {
     pub player_movement: Option<Vec2>,
     pub player_point: Option<Vec2>,

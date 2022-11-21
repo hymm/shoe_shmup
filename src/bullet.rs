@@ -53,14 +53,17 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
         let direction = Vec2::new(-axis.z * f32::sin(angle), f32::cos(angle));
         let velocity = Velocity(BULLET_SPEED * direction);
         commands
-            .spawn_bundle(GeometryBuilder::build_as(
-                &shape,
-                DrawMode::Fill(FillMode::color(Color::rgb_u8(255, 255, 255))),
-                ev.initial_transform,
+            .spawn((
+                GeometryBuilder::build_as(
+                    &shape,
+                    DrawMode::Fill(FillMode::color(Color::rgb_u8(255, 255, 255))),
+                    ev.initial_transform,
+                ),
+                Bullet,
+                velocity,
+                CollisionShape::new_circle(bullet_radius),
             ))
-            .insert(Bullet)
-            .insert(velocity)
-            .insert(CollisionShape::new_circle(bullet_radius));
+            .insert(Bullet);
     }
 }
 
@@ -115,7 +118,7 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
 fn spawn_bullet_clip(mut commands: Commands) {
     const MAX_BULLETS: usize = 5;
 
-    commands.spawn().insert(BulletClip {
+    commands.spawn(BulletClip {
         max_size: MAX_BULLETS,
         bullets: MAX_BULLETS,
     });

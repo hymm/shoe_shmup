@@ -2,7 +2,6 @@ use async_compat::Compat;
 use bevy::ecs::schedule::ShouldRun;
 use bevy::ecs::system::{SystemParam, SystemState};
 use bevy::prelude::*;
-use bevy::reflect::TypeRegistry;
 use bevy::reflect::TypeRegistryArc;
 use bevy::scene::DynamicEntity;
 use bevy::tasks::{IoTaskPool, Task};
@@ -37,10 +36,9 @@ fn save_scene(world: &mut World) {
     let scene_params = state.get_mut(world);
     let enemies = scene_params.enemies.iter().collect();
 
-    let type_registry = world.get_resource::<TypeRegistry>().unwrap();
+    let type_registry = world.get_resource::<AppTypeRegistry>().unwrap();
     let scene = scene_from_entities(world, type_registry, enemies);
     let scene = scene.serialize_ron(type_registry).unwrap();
-    let task_pool = world.get_resource::<IoTaskPool>().unwrap();
     let task = Compat::new(async {
         let result = fs::write("assets/levels/temp.ron", scene).await;
         if let Err(error) = result {
@@ -50,10 +48,9 @@ fn save_scene(world: &mut World) {
         }
     });
     dbg!("try save");
-    let task = task_pool.spawn(task);
+    let task = IoTaskPool::get().spawn(task);
 
-    let mut entity = world.spawn();
-    entity.insert(SaveTask(task));
+    world.spawn(SaveTask(task));
 }
 
 fn handle_save_task(mut commands: Commands, mut save_task: Query<(Entity, &mut SaveTask)>) {
@@ -77,9 +74,13 @@ pub fn scene_from_entities(
 
         // Create a new dynamic entity for each entity of the given archetype
         // and insert it into the dynamic scene.
-        for entity in archetype.entities().iter().filter(|e| entities.contains(e)) {
+        for entity in archetype
+            .entities()
+            .iter()
+            .filter(|e| entities.contains(&e.entity()))
+        {
             scene.entities.push(DynamicEntity {
-                entity: entity.id(),
+                entity: entity.entity().index(),
                 components: Vec::new(),
             });
         }
@@ -95,10 +96,10 @@ pub fn scene_from_entities(
                 for (i, entity) in archetype
                     .entities()
                     .iter()
-                    .filter(|e| entities.contains(e))
+                    .filter(|e| entities.contains(&e.entity()))
                     .enumerate()
                 {
-                    if let Some(component) = reflect_component.reflect(world, *entity) {
+                    if let Some(component) = reflect_component.reflect(world, entity.entity()) {
                         scene.entities[entities_offset + i]
                             .components
                             .push(component.clone_value());
@@ -124,13 +125,9 @@ fn load_scene(
 pub struct SerializePlugin;
 impl Plugin for SerializePlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(
-            save_scene
-                .exclusive_system()
-                .with_run_criteria(has_save_event),
-        )
-        .add_system_set(SystemSet::on_enter(GameState::LoadLevel).with_system(load_scene))
-        .add_system(handle_save_task)
-        .add_event::<SaveSceneEvent>();
+        app.add_system(save_scene.with_run_criteria(has_save_event))
+            .add_system_set(SystemSet::on_enter(GameState::LoadLevel).with_system(load_scene))
+            .add_system(handle_save_task)
+            .add_event::<SaveSceneEvent>();
     }
 }

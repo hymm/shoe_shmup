@@ -48,19 +48,20 @@ fn spawn_player(mut commands: Commands) {
         closed: true,
     };
 
-    commands
-        .spawn_bundle(GeometryBuilder::build_as(
+    commands.spawn((
+        GeometryBuilder::build_as(
             &shape,
             DrawMode::Fill(FillMode::color(Color::rgb_u8(199, 167, 37))),
             Transform::from_xyz(0.0, 0.0, 1.0),
-        ))
-        .insert(Player)
-        .insert(CollisionShape::new_rectangle(8.0, 12.0))
-        .insert(RailPosition {
+        ),
+        Player,
+        CollisionShape::new_rectangle(8.0, 12.0),
+        RailPosition {
             index: 0,
             position: 0.0,
             direction: RailDirection::Positive,
-        });
+        },
+    ));
 }
 
 #[derive(Component)]
@@ -121,7 +122,7 @@ fn spawn_rail(mut commands: Commands) {
 
     commands.spawn_batch(segments);
     commands.spawn_batch(points);
-    commands.spawn().insert(PlayerRail {
+    commands.spawn(PlayerRail {
         rail: rail_points,
         closed: false,
     });

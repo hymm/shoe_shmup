@@ -22,19 +22,21 @@ fn setup_pause_menu(
     font_assets: Res<FontAssets>,
 ) {
     let node_entity = commands
-        .spawn_bundle(NodeBundle {
-            style: Style {
-                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
-                flex_direction: FlexDirection::ColumnReverse,
-                justify_content: JustifyContent::Center,
-                align_content: AlignContent::Center,
-                align_items: AlignItems::Center,
+        .spawn((
+            NodeBundle {
+                style: Style {
+                    size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
+                    flex_direction: FlexDirection::ColumnReverse,
+                    justify_content: JustifyContent::Center,
+                    align_content: AlignContent::Center,
+                    align_items: AlignItems::Center,
+                    ..Default::default()
+                },
+                background_color: Color::NONE.into(),
                 ..Default::default()
             },
-            color: Color::NONE.into(),
-            ..Default::default()
-        })
-        .insert(PauseMenu)
+            PauseMenu,
+        ))
         .id();
 
     commands.entity(node_entity).with_children(|parent| {
@@ -45,7 +47,7 @@ fn setup_pause_menu(
                 align_items: AlignItems::Center,
                 ..Default::default()
             },
-            color: button_colors.normal,
+            background_color: button_colors.normal,
             ..Default::default()
         };
 
@@ -55,12 +57,12 @@ fn setup_pause_menu(
             color: Color::rgb(0.9, 0.9, 0.9),
         };
         parent
-            .spawn_bundle(button_bundle.clone())
+            .spawn(button_bundle.clone())
             .insert(ExitButton)
             .insert(PauseMenu)
             .with_children(|parent| {
-                parent
-                    .spawn_bundle(TextBundle {
+                parent.spawn((
+                    TextBundle {
                         text: Text {
                             sections: vec![TextSection {
                                 value: "Exit".to_string(),
@@ -69,17 +71,16 @@ fn setup_pause_menu(
                             alignment: Default::default(),
                         },
                         ..Default::default()
-                    })
-                    .insert(PauseMenu);
+                    },
+                    PauseMenu,
+                ));
             });
 
         parent
-            .spawn_bundle(button_bundle.clone())
-            .insert(SaveButton)
-            .insert(PauseMenu)
+            .spawn((button_bundle.clone(), SaveButton, PauseMenu))
             .with_children(|parent| {
-                parent
-                    .spawn_bundle(TextBundle {
+                parent.spawn((
+                    TextBundle {
                         text: Text {
                             sections: vec![TextSection {
                                 value: "Save".to_string(),
@@ -88,17 +89,16 @@ fn setup_pause_menu(
                             alignment: Default::default(),
                         },
                         ..Default::default()
-                    })
-                    .insert(PauseMenu);
+                    },
+                    PauseMenu,
+                ));
             });
 
         parent
-            .spawn_bundle(button_bundle)
-            .insert(CloseButton)
-            .insert(PauseMenu)
+            .spawn((button_bundle, CloseButton, PauseMenu))
             .with_children(|parent| {
-                parent
-                    .spawn_bundle(TextBundle {
+                parent.spawn((
+                    TextBundle {
                         text: Text {
                             sections: vec![TextSection {
                                 value: "Close".to_string(),
@@ -107,8 +107,9 @@ fn setup_pause_menu(
                             alignment: Default::default(),
                         },
                         ..Default::default()
-                    })
-                    .insert(PauseMenu);
+                    },
+                    PauseMenu,
+                ));
             });
     });
 }

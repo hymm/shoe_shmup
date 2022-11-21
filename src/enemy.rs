@@ -47,9 +47,7 @@ fn after_deserialize_enemy(
     if !q.is_empty() {
         state.set(GameState::Playing).unwrap();
         for (entity, transform) in q.iter() {
-            commands
-                .entity(entity)
-                .insert_bundle(EnemyBundle::new(*transform));
+            commands.entity(entity).insert(EnemyBundle::new(*transform));
         }
     }
 }

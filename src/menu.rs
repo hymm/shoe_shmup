@@ -15,9 +15,10 @@ impl Plugin for MenuPlugin {
     }
 }
 
+#[derive(Resource)]
 pub struct ButtonColors {
-    pub normal: UiColor,
-    pub hovered: UiColor,
+    pub normal: BackgroundColor,
+    pub hovered: BackgroundColor,
 }
 
 impl Default for ButtonColors {
@@ -37,24 +38,24 @@ fn setup_menu(
     font_assets: Res<FontAssets>,
     button_colors: Res<ButtonColors>,
 ) {
+    commands.spawn((Camera2dBundle::default(), Velocity(Vec2::new(0.0, 20.0))));
     commands
-        .spawn_bundle(Camera2dBundle::default())
-        .insert(Velocity(Vec2::new(0.0, 20.0)));
-    commands
-        .spawn_bundle(ButtonBundle {
-            style: Style {
-                size: Size::new(Val::Px(120.0), Val::Px(50.0)),
-                margin: UiRect::all(Val::Auto),
-                justify_content: JustifyContent::Center,
-                align_items: AlignItems::Center,
+        .spawn((
+            ButtonBundle {
+                style: Style {
+                    size: Size::new(Val::Px(120.0), Val::Px(50.0)),
+                    margin: UiRect::all(Val::Auto),
+                    justify_content: JustifyContent::Center,
+                    align_items: AlignItems::Center,
+                    ..Default::default()
+                },
+                background_color: button_colors.normal,
                 ..Default::default()
             },
-            color: button_colors.normal,
-            ..Default::default()
-        })
-        .insert(PlayButton)
+            PlayButton,
+        ))
         .with_children(|parent| {
-            parent.spawn_bundle(TextBundle {
+            parent.spawn(TextBundle {
                 text: Text {
                     sections: vec![TextSection {
                         value: "Play".to_string(),
@@ -71,7 +72,12 @@ fn setup_menu(
         });
 }
 
-pub type ButtonInteraction<'a> = (Entity, &'a Interaction, &'a mut UiColor, &'a Children);
+pub type ButtonInteraction<'a> = (
+    Entity,
+    &'a Interaction,
+    &'a mut BackgroundColor,
+    &'a Children,
+);
 
 fn click_play_button(
     mut commands: Commands,
