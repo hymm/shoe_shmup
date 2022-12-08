@@ -10,6 +10,7 @@ pub struct MenuPlugin;
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<ButtonColors>()
+            .add_startup_system(setup_camera)
             .add_system_set(SystemSet::on_enter(GameState::Menu).with_system(setup_menu))
             .add_system_set(SystemSet::on_update(GameState::Menu).with_system(click_play_button));
     }
@@ -33,12 +34,15 @@ impl Default for ButtonColors {
 #[derive(Component)]
 struct PlayButton;
 
+fn setup_camera(mut commands: Commands) {
+    commands.spawn((Camera2dBundle::default(), Velocity(Vec2::new(0.0, 20.0))));
+}
+
 fn setup_menu(
     mut commands: Commands,
     font_assets: Res<FontAssets>,
     button_colors: Res<ButtonColors>,
 ) {
-    commands.spawn((Camera2dBundle::default(), Velocity(Vec2::new(0.0, 20.0))));
     commands
         .spawn((
             ButtonBundle {

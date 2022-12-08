@@ -4,7 +4,7 @@ use crate::enemy::Enemy;
 use crate::loading::AudioAssets;
 use crate::physics::{FixedOffset, Velocity, UPDATE_COLLISION_SHAPES};
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
-use crate::GameState;
+use crate::{GameState, LevelEntity};
 use bevy::prelude::*;
 use bevy_kira_audio::prelude::*;
 use bevy_prototype_lyon::entity::ShapeBundle;
@@ -38,7 +38,8 @@ impl Plugin for PlayerPlugin {
                 SystemSet::new()
                     .after(UPDATE_COLLISION_SHAPES)
                     .with_system(check_player_collisions_with_enemies),
-            );
+            )
+            .add_system_set(SystemSet::on_enter(GameState::PlayerDead).with_system(back_to_menu));
     }
 }
 
@@ -61,6 +62,7 @@ fn spawn_player(mut commands: Commands) {
             position: 0.0,
             direction: RailDirection::Positive,
         },
+        LevelEntity,
     ));
 }
 
@@ -73,6 +75,7 @@ struct RailShapeBundle {
     #[bundle]
     shape_bundle: ShapeBundle,
     offset: FixedOffset,
+    level_entity: LevelEntity,
 }
 
 fn spawn_rail(mut commands: Commands) {
@@ -90,13 +93,14 @@ fn spawn_rail(mut commands: Commands) {
             Transform::from_xyz(0.0, 0.0, 0.0),
         ),
         offset: FixedOffset(Vec2::new(0., -220.)),
+        level_entity: LevelEntity,
     }];
 
     for (point1, point2) in rail_points[..rail_points.len() - 1]
         .iter()
         .zip(rail_points[1..].iter())
     {
-        segments.push(RailShapeBundle {
+        segments.push((RailShapeBundle {
             tag: RailGraphic,
             shape_bundle: GeometryBuilder::build_as(
                 &shapes::Line(*point1, *point2),
@@ -104,7 +108,8 @@ fn spawn_rail(mut commands: Commands) {
                 Transform::from_xyz(0.0, 0.0, 0.0),
             ),
             offset: FixedOffset(Vec2::new(0., -220.)),
-        });
+            level_entity: LevelEntity,
+        },));
 
         points.push(RailShapeBundle {
             tag: RailGraphic,
@@ -117,15 +122,19 @@ fn spawn_rail(mut commands: Commands) {
                 Transform::from_xyz(0.0, 0.0, 0.0),
             ),
             offset: FixedOffset(Vec2::new(0., -220.)),
+            level_entity: LevelEntity,
         });
     }
 
     commands.spawn_batch(segments);
     commands.spawn_batch(points);
-    commands.spawn(PlayerRail {
-        rail: rail_points,
-        closed: false,
-    });
+    commands.spawn((
+        PlayerRail {
+            rail: rail_points,
+            closed: false,
+        },
+        LevelEntity,
+    ));
 }
 
 fn move_player(
@@ -209,6 +218,7 @@ fn check_player_collisions_with_enemies(
     mut commands: Commands,
     player: Query<(Entity, &CollisionShape), (With<Player>, Without<Enemy>)>,
     enemies: Query<(Entity, &CollisionShape), With<Enemy>>,
+    mut state: ResMut<State<GameState>>,
     audio_assets: Option<Res<AudioAssets>>,
     audio: Res<Audio>,
 ) {
@@ -221,6 +231,22 @@ fn check_player_collisions_with_enemies(
         if player_shape.is_collided_with(enemy_shape) {
             commands.entity(player_entity).despawn();
             audio.play(player_death_sfx.clone());
+            state.replace(GameState::PlayerDead).unwrap();
         }
     }
+}
+
+fn back_to_menu(
+    mut state: ResMut<State<GameState>>,
+    q: Query<Entity, With<LevelEntity>>,
+    mut camera: Query<&mut Transform, With<Camera>>,
+    mut commands: Commands,
+) {
+    state.overwrite_replace(GameState::Menu).unwrap();
+    for e in &q {
+        commands.entity(e).despawn();
+    }
+
+    let mut transform = camera.single_mut();
+    transform.translation = Vec3::new(0.0, 0.0, transform.translation.z);
 }

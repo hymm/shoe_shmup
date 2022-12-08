@@ -1,7 +1,7 @@
 use crate::{
     constants::{SCREEN_HEIGHT, SCREEN_WIDTH},
     physics::{FixedOffset, Velocity},
-    GameState,
+    GameState, LevelEntity,
 };
 use bevy::prelude::*;
 use bevy_prototype_lyon::{entity::ShapeBundle, prelude::*};
@@ -52,18 +52,17 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
         let (axis, angle) = ev.initial_transform.rotation.to_axis_angle();
         let direction = Vec2::new(-axis.z * f32::sin(angle), f32::cos(angle));
         let velocity = Velocity(BULLET_SPEED * direction);
-        commands
-            .spawn((
-                GeometryBuilder::build_as(
-                    &shape,
-                    DrawMode::Fill(FillMode::color(Color::rgb_u8(255, 255, 255))),
-                    ev.initial_transform,
-                ),
-                Bullet,
-                velocity,
-                CollisionShape::new_circle(bullet_radius),
-            ))
-            .insert(Bullet);
+        commands.spawn((
+            GeometryBuilder::build_as(
+                &shape,
+                DrawMode::Fill(FillMode::color(Color::rgb_u8(255, 255, 255))),
+                ev.initial_transform,
+            ),
+            Bullet,
+            velocity,
+            CollisionShape::new_circle(bullet_radius),
+            LevelEntity,
+        ));
     }
 }
 
@@ -94,6 +93,7 @@ struct BulletClipGraphicBundle {
     #[bundle]
     shape_bundle: ShapeBundle,
     offset: FixedOffset,
+    level_entity: LevelEntity,
 }
 
 fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
@@ -109,6 +109,7 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
                     Transform::default(),
                 ),
                 offset: FixedOffset(Vec2::new(0., 0.)),
+                level_entity: LevelEntity,
             }
         })
         .collect()
@@ -118,10 +119,13 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
 fn spawn_bullet_clip(mut commands: Commands) {
     const MAX_BULLETS: usize = 5;
 
-    commands.spawn(BulletClip {
-        max_size: MAX_BULLETS,
-        bullets: MAX_BULLETS,
-    });
+    commands.spawn((
+        BulletClip {
+            max_size: MAX_BULLETS,
+            bullets: MAX_BULLETS,
+        },
+        LevelEntity,
+    ));
 
     commands.spawn_batch(get_bullet_clip_bundles(MAX_BULLETS));
 }

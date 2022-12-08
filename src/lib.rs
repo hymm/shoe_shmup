@@ -44,11 +44,16 @@ enum GameState {
     PostLoadLevel,
     // During this State the actual game logic is executed
     Playing,
+    // level succeed
+    LevelFinished,
     // Here the menu is drawn and waiting for player interaction
     Menu,
     Paused,
     PlayerDead,
 }
+
+#[derive(Component)]
+pub struct LevelEntity;
 
 pub struct GamePlugin;
 

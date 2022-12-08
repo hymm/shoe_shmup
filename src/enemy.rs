@@ -1,7 +1,8 @@
 use crate::bullet::Bullet;
 use crate::loading::AudioAssets;
 use crate::physics::UPDATE_COLLISION_SHAPES;
-use crate::GameState;
+use crate::{GameState, LevelEntity};
+use bevy::log::Level;
 use bevy::prelude::*;
 use bevy_kira_audio::prelude::*;
 use bevy_prototype_lyon::entity::ShapeBundle;
@@ -20,6 +21,7 @@ struct EnemyBundle {
     #[bundle]
     shape_bundle: ShapeBundle,
     collision_shape: CollisionShape,
+    level_entity: LevelEntity,
 }
 
 impl EnemyBundle {
@@ -35,6 +37,7 @@ impl EnemyBundle {
                 transform,
             ),
             collision_shape: CollisionShape::new_rectangle(ENEMY_LENGTH, ENEMY_LENGTH),
+            level_entity: LevelEntity,
         }
     }
 }
