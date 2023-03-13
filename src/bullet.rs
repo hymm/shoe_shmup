@@ -4,7 +4,7 @@ use crate::{
     GameState, LevelEntity,
 };
 use bevy::prelude::*;
-use bevy_prototype_lyon::{entity::ShapeBundle, prelude::*};
+use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
 const BULLET_SPEED: f32 = 500.0;
@@ -53,11 +53,12 @@ fn spawn_bullet(mut commands: Commands, mut spawn_event: EventReader<SpawnBullet
         let direction = Vec2::new(-axis.z * f32::sin(angle), f32::cos(angle));
         let velocity = Velocity(BULLET_SPEED * direction);
         commands.spawn((
-            GeometryBuilder::build_as(
-                &shape,
-                DrawMode::Fill(FillMode::color(Color::rgb_u8(255, 255, 255))),
-                ev.initial_transform,
-            ),
+            ShapeBundle {
+                path: GeometryBuilder::build_as(&shape),
+                transform: ev.initial_transform,
+                ..default()
+            },
+            Fill::color(Color::rgb_u8(255, 255, 255)),
             Bullet,
             velocity,
             CollisionShape::new_circle(bullet_radius),
@@ -92,6 +93,7 @@ struct BulletClipGraphicBundle {
     tag: BulletClipGraphic,
     #[bundle]
     shape_bundle: ShapeBundle,
+    stroke: Stroke,
     offset: FixedOffset,
     level_entity: LevelEntity,
 }
@@ -103,11 +105,14 @@ fn get_bullet_clip_bundles(num_bullets: usize) -> Vec<BulletClipGraphicBundle> {
             let point = Vec2::new(start_point.x, start_point.y) + i as f32 * Vec2::new(3., 0.);
             BulletClipGraphicBundle {
                 tag: BulletClipGraphic,
-                shape_bundle: GeometryBuilder::build_as(
-                    &shapes::Line(point, point + Vec2::new(0.0, -8.0)),
-                    DrawMode::Stroke(StrokeMode::new(Color::rgb_u8(0, 0, 0), 2.)),
-                    Transform::default(),
-                ),
+                shape_bundle: ShapeBundle {
+                    path: GeometryBuilder::build_as(&shapes::Line(
+                        point,
+                        point + Vec2::new(0.0, -8.0),
+                    )),
+                    ..default()
+                },
+                stroke: Stroke::new(Color::rgb_u8(0, 0, 0), 2.),
                 offset: FixedOffset(Vec2::new(0., 0.)),
                 level_entity: LevelEntity,
             }
@@ -148,12 +153,10 @@ pub struct BulletPlugin;
 impl Plugin for BulletPlugin {
     fn build(&self, app: &mut App) {
         app.add_event::<SpawnBullet>()
-            .add_system_set(SystemSet::on_exit(GameState::Menu).with_system(spawn_bullet_clip))
-            .add_system_set(
-                SystemSet::on_update(GameState::Playing)
-                    .with_system(spawn_bullet)
-                    .with_system(despawn_bullet)
-                    .with_system(update_bullet_clip),
+            .add_system(spawn_bullet_clip.in_schedule(OnExit(GameState::Menu)))
+            .add_systems(
+                (spawn_bullet, despawn_bullet, update_bullet_clip)
+                    .in_set(OnUpdate(GameState::Playing)),
             );
     }
 }

@@ -1,5 +1,5 @@
 use crate::{physics::Velocity, GameState};
-use bevy::prelude::*;
+use bevy::{prelude::*, window::PrimaryWindow};
 
 pub struct ActionsPlugin;
 
@@ -7,15 +7,16 @@ pub struct ActionsPlugin;
 // Actions can then be used as a resource in other systems to act on the player input.
 impl Plugin for ActionsPlugin {
     fn build(&self, app: &mut App) {
-        app.init_resource::<Actions>().add_system_set(
-            SystemSet::on_update(GameState::Playing)
-                .label("actions")
-                .with_system(set_movement_actions)
-                .with_system(set_point_actions)
-                .with_system(set_shoot_action),
-        );
+        app.init_resource::<Actions>()
+            .configure_set(ActionsSet.in_set(OnUpdate(GameState::Playing)))
+            .add_systems(
+                (set_movement_actions, set_point_actions, set_shoot_action).in_set(ActionsSet),
+            );
     }
 }
+
+#[derive(SystemSet, Debug, PartialEq, Eq, Hash, Clone)]
+pub struct ActionsSet;
 
 #[derive(Resource, Default)]
 pub struct Actions {
@@ -38,9 +39,9 @@ fn set_point_actions(
     mut actions: ResMut<Actions>,
     mut cursor_pos: EventReader<CursorMoved>,
     camera: Query<&Transform, (With<Camera>, With<Velocity>)>,
-    windows: Res<Windows>,
+    window: Query<&Window, With<PrimaryWindow>>,
 ) {
-    let window = windows.get_primary().unwrap();
+    let window = window.single();
     for position in cursor_pos.iter() {
         let transform = camera.single();
         // convert cursor_pos into world coordinates

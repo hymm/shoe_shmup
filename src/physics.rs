@@ -4,7 +4,8 @@ use impacted::CollisionShape;
 
 use crate::GameState;
 
-pub const UPDATE_COLLISION_SHAPES: &str = "update_collision_shapes";
+#[derive(SystemSet, Hash, PartialEq, Eq, Debug, Clone)]
+pub struct UpdateCollisionShapes;
 
 #[derive(Component)]
 pub struct Velocity(pub Vec2);
@@ -43,15 +44,13 @@ fn update_fixed_position(
 pub struct PhysicsPlugin;
 impl Plugin for PhysicsPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system_set(
-            SystemSet::on_update(GameState::Playing)
-                .with_system(update_position)
-                .with_system(update_fixed_position),
+        app.add_systems(
+            (update_position, update_fixed_position).in_set(OnUpdate(GameState::Playing)),
         )
-        .add_system_to_stage(
-            CoreStage::PostUpdate,
+        .add_system(
             update_shape_transforms
-                .label(UPDATE_COLLISION_SHAPES)
+                .in_base_set(CoreSet::PostUpdate)
+                .in_set(UpdateCollisionShapes)
                 .after(TransformSystem::TransformPropagate),
         );
     }

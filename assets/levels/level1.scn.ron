@@ -15,15 +15,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     14: (
@@ -41,15 +61,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     15: (
@@ -65,17 +105,37 @@
           scale: (
             x: 1.0, y: 1.0, z: 1.0
           )
-        ),
+        ),        
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     16: (
@@ -93,15 +153,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     17: (
@@ -119,15 +199,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     18: (
@@ -145,15 +245,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     19: (
@@ -171,15 +291,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     20: (
@@ -197,15 +337,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     21: (
@@ -223,15 +383,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     22: (
@@ -249,15 +429,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     23: (
@@ -275,15 +475,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     24: (
@@ -301,15 +521,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     25: (
@@ -327,15 +567,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     26: (
@@ -353,15 +613,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     27: (
@@ -379,15 +659,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     28: (
@@ -405,15 +705,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     29: (
@@ -431,15 +751,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     30: (
@@ -457,15 +797,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     31: (
@@ -483,15 +843,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     32: (
@@ -509,15 +889,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     33: (
@@ -535,15 +935,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     34: (
@@ -561,15 +981,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     35: (
@@ -587,15 +1027,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     36: (
@@ -613,15 +1073,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     37: (
@@ -639,15 +1119,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     38: (
@@ -665,15 +1165,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     39: (
@@ -691,15 +1211,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     40: (
@@ -717,15 +1257,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     41: (
@@ -743,15 +1303,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     42: (
@@ -769,15 +1349,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     43: (
@@ -795,15 +1395,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     44: (
@@ -821,15 +1441,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     45: (
@@ -847,15 +1487,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     46: (
@@ -873,15 +1533,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     ),
     47: (
@@ -899,15 +1579,35 @@
           )
         ),
         "bevy_transform::components::global_transform::GlobalTransform": ((
-          1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0
+          matrix3: (
+            x_axis: (
+              x: 1.0,
+              y: 0.0,
+              z: 0.0,
+            ),
+            y_axis: (
+              x: 0.0,
+              y: 1.0,
+              z: 0.0,
+            ),
+            z_axis: (
+              x: 0.0,
+              y: 0.0,
+              z: 1.0,
+            ),
+          ),
+          translation: (
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+          ),
         )),
         "bevy_render::view::visibility::ComputedVisibility": (
-          is_visible_in_hierarchy: true,
-          is_visible_in_view: true,
+          flags: (
+            bits: 0,
+          ),
         ),
-        "bevy_render::view::visibility::Visibility": (
-          is_visible: true,
-        )
+        "bevy_render::view::visibility::Visibility": Inherited,
       }
     )
   }

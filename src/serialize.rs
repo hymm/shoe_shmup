@@ -1,5 +1,4 @@
 use async_compat::Compat;
-use bevy::ecs::schedule::ShouldRun;
 use bevy::ecs::system::{SystemParam, SystemState};
 use bevy::prelude::*;
 use bevy::reflect::TypeRegistryArc;
@@ -14,11 +13,11 @@ use crate::GameState;
 pub struct SaveSceneEvent;
 
 // TODO: move to serialize file
-fn has_save_event(mut e: EventReader<SaveSceneEvent>) -> ShouldRun {
-    let mut result = ShouldRun::No;
+fn has_save_event(mut e: EventReader<SaveSceneEvent>) -> bool {
+    let mut result = false;
     // iterate over all events to drain
     for _ in e.iter() {
-        result = ShouldRun::Yes;
+        result = true;
     }
     result
 }
@@ -99,7 +98,9 @@ pub fn scene_from_entities(
                     .filter(|e| entities.contains(&e.entity()))
                     .enumerate()
                 {
-                    if let Some(component) = reflect_component.reflect(world, entity.entity()) {
+                    if let Some(component) =
+                        reflect_component.reflect(world.get_entity(entity.entity()).unwrap())
+                    {
                         scene.entities[entities_offset + i]
                             .components
                             .push(component.clone_value());
@@ -115,18 +116,19 @@ pub fn scene_from_entities(
 fn load_scene(
     asset_server: Res<AssetServer>,
     mut scene_spawner: ResMut<SceneSpawner>,
-    mut state: ResMut<State<GameState>>,
+    mut state: ResMut<NextState<GameState>>,
 ) {
     let scene_handle = asset_server.load("levels/level1.scn.ron");
+
     scene_spawner.spawn_dynamic(scene_handle);
-    state.overwrite_replace(GameState::PostLoadLevel).unwrap();
+    state.set(GameState::PostLoadLevel);
 }
 
 pub struct SerializePlugin;
 impl Plugin for SerializePlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(save_scene.with_run_criteria(has_save_event))
-            .add_system_set(SystemSet::on_enter(GameState::LoadLevel).with_system(load_scene))
+        app.add_system(save_scene.run_if(has_save_event))
+            .add_system(load_scene.in_schedule(OnEnter(GameState::LoadLevel)))
             .add_system(handle_save_task)
             .add_event::<SaveSceneEvent>();
     }

@@ -10,9 +10,9 @@ pub struct MenuPlugin;
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<ButtonColors>()
-            .add_startup_system(setup_camera)
-            .add_system_set(SystemSet::on_enter(GameState::Menu).with_system(setup_menu))
-            .add_system_set(SystemSet::on_update(GameState::Menu).with_system(click_play_button));
+            .add_system(setup_camera.on_startup())
+            .add_system(setup_menu.in_schedule(OnEnter(GameState::Menu)))
+            .add_system(click_play_button.in_set(OnUpdate(GameState::Menu)));
     }
 }
 
@@ -69,7 +69,8 @@ fn setup_menu(
                             color: Color::rgb(0.9, 0.9, 0.9),
                         },
                     }],
-                    alignment: Default::default(),
+                    alignment: TextAlignment::Left,
+                    ..default()
                 },
                 ..Default::default()
             });
@@ -86,7 +87,7 @@ pub type ButtonInteraction<'a> = (
 fn click_play_button(
     mut commands: Commands,
     button_colors: Res<ButtonColors>,
-    mut state: ResMut<State<GameState>>,
+    mut state: ResMut<NextState<GameState>>,
     mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<Button>)>,
     text_query: Query<Entity, With<Text>>,
 ) {
@@ -96,7 +97,7 @@ fn click_play_button(
             Interaction::Clicked => {
                 commands.entity(button).despawn();
                 commands.entity(text).despawn();
-                state.set(GameState::LoadLevel).unwrap();
+                state.set(GameState::LoadLevel);
             }
             Interaction::Hovered => {
                 *color = button_colors.hovered;

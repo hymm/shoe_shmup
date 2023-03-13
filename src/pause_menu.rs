@@ -68,7 +68,8 @@ fn setup_pause_menu(
                                 value: "Exit".to_string(),
                                 style: text_style.clone(),
                             }],
-                            alignment: Default::default(),
+                            alignment: TextAlignment::Left,
+                            ..default()
                         },
                         ..Default::default()
                     },
@@ -86,7 +87,8 @@ fn setup_pause_menu(
                                 value: "Save".to_string(),
                                 style: text_style.clone(),
                             }],
-                            alignment: Default::default(),
+                            alignment: TextAlignment::Left,
+                            ..default()
                         },
                         ..Default::default()
                     },
@@ -104,7 +106,8 @@ fn setup_pause_menu(
                                 value: "Close".to_string(),
                                 style: text_style.clone(),
                             }],
-                            alignment: Default::default(),
+                            alignment: TextAlignment::Left,
+                            ..default()
                         },
                         ..Default::default()
                     },
@@ -120,9 +123,9 @@ fn despawn_pause_menu(mut commands: Commands, q: Query<Entity, With<PauseMenu>>)
     }
 }
 
-fn pause(keyboard_input: Res<Input<KeyCode>>, mut game_state: ResMut<State<GameState>>) {
+fn pause(keyboard_input: Res<Input<KeyCode>>, mut game_state: ResMut<NextState<GameState>>) {
     if keyboard_input.just_pressed(KeyCode::Escape) {
-        game_state.set(GameState::Paused).unwrap();
+        game_state.set(GameState::Paused);
     }
 }
 
@@ -156,11 +159,11 @@ fn click_exit_button(
 
 fn click_close_button(
     mut interaction_query: Query<ButtonInteraction, (Changed<Interaction>, With<CloseButton>)>,
-    mut game_state: ResMut<State<GameState>>,
+    mut game_state: ResMut<NextState<GameState>>,
 ) {
     for (_button, interaction, mut _color, _children) in interaction_query.iter_mut() {
         if *interaction == Interaction::Clicked {
-            game_state.set(GameState::Playing).unwrap();
+            game_state.set(GameState::Playing);
         }
     }
 }
@@ -179,15 +182,17 @@ fn click_save_button(
 pub struct PauseMenuPlugin;
 impl Plugin for PauseMenuPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system_set(SystemSet::on_enter(GameState::Paused).with_system(setup_pause_menu))
-            .add_system_set(
-                SystemSet::on_update(GameState::Paused)
-                    .with_system(click_exit_button)
-                    .with_system(hover_button)
-                    .with_system(click_close_button)
-                    .with_system(click_save_button),
+        app.add_system(setup_pause_menu.in_schedule(OnEnter(GameState::Paused)))
+            .add_systems(
+                (
+                    click_exit_button,
+                    hover_button,
+                    click_close_button,
+                    click_save_button,
+                )
+                    .in_set(OnUpdate(GameState::Paused)),
             )
-            .add_system_set(SystemSet::on_exit(GameState::Paused).with_system(despawn_pause_menu))
-            .add_system_set(SystemSet::on_update(GameState::Playing).with_system(pause));
+            .add_system(despawn_pause_menu.in_schedule(OnExit(GameState::Paused)))
+            .add_system(pause.in_set(OnUpdate(GameState::Playing)));
     }
 }

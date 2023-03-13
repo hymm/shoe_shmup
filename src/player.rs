@@ -1,13 +1,12 @@
-use crate::actions::Actions;
+use crate::actions::{Actions, ActionsSet};
 use crate::bullet::{BulletClip, SpawnBullet};
 use crate::enemy::Enemy;
 use crate::loading::AudioAssets;
-use crate::physics::{FixedOffset, Velocity, UPDATE_COLLISION_SHAPES};
+use crate::physics::{FixedOffset, UpdateCollisionShapes};
 use crate::player_rail::{PlayerRail, RailDirection, RailPosition};
 use crate::{GameState, LevelEntity};
 use bevy::prelude::*;
 use bevy_kira_audio::prelude::*;
-use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
@@ -21,25 +20,18 @@ pub struct Player;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugin(ShapePlugin)
-            .add_system_set(
-                SystemSet::on_exit(GameState::Menu)
-                    .with_system(spawn_player)
-                    .with_system(spawn_rail),
+            .add_systems((spawn_player, spawn_rail).in_schedule(OnExit(GameState::Menu)))
+            .add_systems(
+                (move_player, point_player, player_shoot)
+                    .in_set(OnUpdate(GameState::Playing))
+                    .after(ActionsSet),
             )
-            .add_system_set(
-                SystemSet::on_update(GameState::Playing)
-                    .after("actions")
-                    .with_system(move_player)
-                    .with_system(point_player)
-                    .with_system(player_shoot),
+            .add_system(
+                check_player_collisions_with_enemies
+                    .in_base_set(CoreSet::PostUpdate)
+                    .after(UpdateCollisionShapes),
             )
-            .add_system_set_to_stage(
-                CoreStage::PostUpdate,
-                SystemSet::new()
-                    .after(UPDATE_COLLISION_SHAPES)
-                    .with_system(check_player_collisions_with_enemies),
-            )
-            .add_system_set(SystemSet::on_enter(GameState::PlayerDead).with_system(back_to_menu));
+            .add_system(back_to_menu.in_schedule(OnEnter(GameState::PlayerDead)));
     }
 }
 
@@ -50,11 +42,11 @@ fn spawn_player(mut commands: Commands) {
     };
 
     commands.spawn((
-        GeometryBuilder::build_as(
-            &shape,
-            DrawMode::Fill(FillMode::color(Color::rgb_u8(199, 167, 37))),
-            Transform::from_xyz(0.0, 0.0, 1.0),
-        ),
+        ShapeBundle {
+            path: GeometryBuilder::build_as(&shape),
+            ..default()
+        },
+        Fill::color(Color::rgb_u8(199, 167, 37)),
         Player,
         CollisionShape::new_rectangle(8.0, 12.0),
         RailPosition {
@@ -70,8 +62,19 @@ fn spawn_player(mut commands: Commands) {
 struct RailGraphic;
 
 #[derive(Bundle)]
-struct RailShapeBundle {
+struct RailShapeFillBundle {
     tag: RailGraphic,
+    fill: Fill,
+    #[bundle]
+    shape_bundle: ShapeBundle,
+    offset: FixedOffset,
+    level_entity: LevelEntity,
+}
+
+#[derive(Bundle)]
+struct RailShapeStrokeBundle {
+    tag: RailGraphic,
+    stroke: Stroke,
     #[bundle]
     shape_bundle: ShapeBundle,
     offset: FixedOffset,
@@ -82,16 +85,17 @@ fn spawn_rail(mut commands: Commands) {
     let rail_points = vec![Vec2::new(-110.0, 0.0), Vec2::new(110.0, 0.0)];
     let rail_color = Color::rgb_u8(135, 188, 108);
     let mut segments = vec![];
-    let mut points = vec![RailShapeBundle {
+    let mut points = vec![RailShapeFillBundle {
         tag: RailGraphic,
-        shape_bundle: GeometryBuilder::build_as(
-            &shapes::Circle {
+
+        fill: Fill::color(rail_color),
+        shape_bundle: ShapeBundle {
+            path: GeometryBuilder::build_as(&shapes::Circle {
                 radius: 10.,
                 center: rail_points[0],
-            },
-            DrawMode::Fill(FillMode::color(rail_color)),
-            Transform::from_xyz(0.0, 0.0, 0.0),
-        ),
+            }),
+            ..default()
+        },
         offset: FixedOffset(Vec2::new(0., -220.)),
         level_entity: LevelEntity,
     }];
@@ -100,27 +104,27 @@ fn spawn_rail(mut commands: Commands) {
         .iter()
         .zip(rail_points[1..].iter())
     {
-        segments.push((RailShapeBundle {
+        segments.push((RailShapeStrokeBundle {
             tag: RailGraphic,
-            shape_bundle: GeometryBuilder::build_as(
-                &shapes::Line(*point1, *point2),
-                DrawMode::Stroke(StrokeMode::new(rail_color, 5.0)),
-                Transform::from_xyz(0.0, 0.0, 0.0),
-            ),
+            stroke: Stroke::new(rail_color, 5.0),
+            shape_bundle: ShapeBundle {
+                path: GeometryBuilder::build_as(&shapes::Line(*point1, *point2)),
+                ..default()
+            },
             offset: FixedOffset(Vec2::new(0., -220.)),
             level_entity: LevelEntity,
         },));
 
-        points.push(RailShapeBundle {
+        points.push(RailShapeFillBundle {
             tag: RailGraphic,
-            shape_bundle: GeometryBuilder::build_as(
-                &shapes::Circle {
+            fill: Fill::color(rail_color),
+            shape_bundle: ShapeBundle {
+                path: GeometryBuilder::build_as(&shapes::Circle {
                     radius: 10.,
                     center: *point2,
-                },
-                DrawMode::Fill(FillMode::color(rail_color)),
-                Transform::from_xyz(0.0, 0.0, 0.0),
-            ),
+                }),
+                ..default()
+            },
             offset: FixedOffset(Vec2::new(0., -220.)),
             level_entity: LevelEntity,
         });
@@ -218,7 +222,7 @@ fn check_player_collisions_with_enemies(
     mut commands: Commands,
     player: Query<(Entity, &CollisionShape), (With<Player>, Without<Enemy>)>,
     enemies: Query<(Entity, &CollisionShape), With<Enemy>>,
-    mut state: ResMut<State<GameState>>,
+    mut state: ResMut<NextState<GameState>>,
     audio_assets: Option<Res<AudioAssets>>,
     audio: Res<Audio>,
 ) {
@@ -231,18 +235,18 @@ fn check_player_collisions_with_enemies(
         if player_shape.is_collided_with(enemy_shape) {
             commands.entity(player_entity).despawn();
             audio.play(player_death_sfx.clone());
-            state.replace(GameState::PlayerDead).unwrap();
+            state.set(GameState::PlayerDead);
         }
     }
 }
 
 fn back_to_menu(
-    mut state: ResMut<State<GameState>>,
+    mut state: ResMut<NextState<GameState>>,
     q: Query<Entity, With<LevelEntity>>,
     mut camera: Query<&mut Transform, With<Camera>>,
     mut commands: Commands,
 ) {
-    state.overwrite_replace(GameState::Menu).unwrap();
+    state.set(GameState::Menu);
     for e in &q {
         commands.entity(e).despawn();
     }

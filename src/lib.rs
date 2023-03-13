@@ -34,9 +34,10 @@ use bevy::{app::App, diagnostic::EntityCountDiagnosticsPlugin};
 // This example game uses States to separate logic
 // See https://bevy-cheatbook.github.io/programming/states.html
 // Or https://github.com/bevyengine/bevy/blob/main/examples/ecs/state.rs
-#[derive(Clone, Eq, PartialEq, Debug, Hash)]
+#[derive(States, Clone, Eq, PartialEq, Debug, Hash, Default)]
 enum GameState {
     // During the loading State the LoadingPlugin will load our assets
+    #[default]
     LoadingAssets,
     // load level from scene file
     LoadLevel,
@@ -59,7 +60,7 @@ pub struct GamePlugin;
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.add_state(GameState::LoadingAssets)
+        app.add_state::<GameState>()
             .add_plugin(LoadingPlugin)
             .add_plugin(MenuPlugin)
             .add_plugin(ActionsPlugin)

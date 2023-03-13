@@ -1,11 +1,9 @@
 use crate::bullet::Bullet;
 use crate::loading::AudioAssets;
-use crate::physics::UPDATE_COLLISION_SHAPES;
+use crate::physics::UpdateCollisionShapes;
 use crate::{GameState, LevelEntity};
-use bevy::log::Level;
 use bevy::prelude::*;
 use bevy_kira_audio::prelude::*;
-use bevy_prototype_lyon::entity::ShapeBundle;
 use bevy_prototype_lyon::prelude::*;
 use impacted::CollisionShape;
 
@@ -16,8 +14,9 @@ const ENEMY_LENGTH: f32 = 30.;
 pub(crate) struct Enemy;
 
 #[derive(Bundle)]
-struct EnemyBundle {
+pub struct EnemyBundle {
     enemy_tag: Enemy,
+    fill: Fill,
     #[bundle]
     shape_bundle: ShapeBundle,
     collision_shape: CollisionShape,
@@ -25,17 +24,18 @@ struct EnemyBundle {
 }
 
 impl EnemyBundle {
-    fn new(transform: Transform) -> Self {
+    pub fn new(transform: Transform) -> Self {
         Self {
             enemy_tag: Enemy,
-            shape_bundle: GeometryBuilder::build_as(
-                &shapes::Rectangle {
+            shape_bundle: ShapeBundle {
+                path: GeometryBuilder::build_as(&shapes::Rectangle {
                     extents: Vec2::new(ENEMY_LENGTH, ENEMY_LENGTH),
                     origin: shapes::RectangleOrigin::Center,
-                },
-                DrawMode::Fill(FillMode::color(Color::rgb_u8(164, 69, 55))),
+                }),
                 transform,
-            ),
+                ..default()
+            },
+            fill: Fill::color(Color::rgb_u8(164, 69, 55)),
             collision_shape: CollisionShape::new_rectangle(ENEMY_LENGTH, ENEMY_LENGTH),
             level_entity: LevelEntity,
         }
@@ -45,10 +45,10 @@ impl EnemyBundle {
 fn after_deserialize_enemy(
     mut commands: Commands,
     q: Query<(Entity, &Transform), (With<Enemy>, Without<CollisionShape>)>,
-    mut state: ResMut<State<GameState>>,
+    mut state: ResMut<NextState<GameState>>,
 ) {
     if !q.is_empty() {
-        state.set(GameState::Playing).unwrap();
+        state.set(GameState::Playing);
         for (entity, transform) in q.iter() {
             commands.entity(entity).insert(EnemyBundle::new(*transform));
         }
@@ -85,12 +85,11 @@ pub struct EnemyPlugin;
 impl Plugin for EnemyPlugin {
     fn build(&self, app: &mut App) {
         app.register_type::<Enemy>()
-            .add_system_to_stage(
-                CoreStage::PostUpdate,
-                check_collisions_with_bullets.after(UPDATE_COLLISION_SHAPES),
+            .add_system(
+                check_collisions_with_bullets
+                    .in_base_set(CoreSet::PostUpdate)
+                    .after(UpdateCollisionShapes),
             )
-            .add_system_set(
-                SystemSet::on_update(GameState::PostLoadLevel).with_system(after_deserialize_enemy),
-            );
+            .add_system(after_deserialize_enemy.in_set(OnUpdate(GameState::PostLoadLevel)));
     }
 }
